@@ -1,0 +1,220 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Divide Aí — Manual do garçom</title>
+<meta name="theme-color" content="#14110F">
+<style>
+:root{
+  --base:#14110F; --surf:#1F1A17; --surf2:#2A2320; --line:#3A302A;
+  --ink:#F4EFE8; --dim:#A99C90; --faint:#6E635B;
+  --amber:#E8912D; --pago:#6FA86B; --alerta:#D8604A;
+  box-sizing:border-box;
+  padding-top:env(safe-area-inset-top,0px);
+  padding-bottom:env(safe-area-inset-bottom,0px);
+}
+*,*::before,*::after{box-sizing:inherit}
+html{-webkit-text-size-adjust:100%}
+body{margin:0;background:var(--base);color:var(--ink);
+  font-family:system-ui,-apple-system,"Segoe UI",Roboto,sans-serif;
+  font-size:17px;line-height:1.5;-webkit-font-smoothing:antialiased}
+.wrap{max-width:620px;margin:0 auto;padding:0 20px}
+.num{font-variant-numeric:tabular-nums}
+
+.capa{padding:52px 0 36px;border-bottom:2px solid var(--amber)}
+.capa .et{font-size:13px;color:var(--amber);font-weight:700;letter-spacing:.04em}
+.capa h1{margin:14px 0 10px;font-size:36px;font-weight:700;letter-spacing:-.035em;line-height:1.1}
+.capa p{margin:0;color:var(--dim);font-size:18px}
+
+.passo{padding:36px 0;border-bottom:1px solid var(--line);page-break-inside:avoid}
+.cab{display:flex;gap:15px;align-items:center;margin-bottom:16px}
+.cab .n{width:44px;height:44px;flex:none;border-radius:14px;background:var(--amber);
+  color:var(--base);display:grid;place-items:center;font-weight:700;font-size:20px}
+.cab h2{margin:0;font-size:23px;font-weight:700;letter-spacing:-.02em;line-height:1.15}
+.passo > p{margin:0 0 16px;color:var(--dim)}
+
+.tela{background:var(--surf);border:1px solid var(--line);border-radius:15px;overflow:hidden;margin:18px 0}
+.tela .barra{padding:11px 15px;border-bottom:1px solid var(--line);font-size:13px;color:var(--dim)}
+.tela .barra b{color:var(--ink);font-size:15px;display:block;font-weight:650}
+.chips{display:flex;gap:7px;padding:12px 15px;overflow-x:auto;scrollbar-width:none}
+.chips::-webkit-scrollbar{display:none}
+.chip{flex:none;padding:8px 12px;border-radius:10px;background:var(--surf2);
+  border:1px solid var(--line);font-size:13px;font-weight:600}
+.chip.on{background:var(--amber);border-color:var(--amber);color:#14110F}
+.chip em{font-style:normal;display:block;font-size:11.5px;color:var(--amber);font-weight:650}
+.chip.on em{color:#14110F;opacity:.75}
+.li{display:flex;align-items:center;gap:11px;padding:12px 15px;border-top:1px solid var(--line)}
+.li .box{width:21px;height:21px;flex:none;border-radius:6px;border:2px solid var(--faint);position:relative}
+.li.on{background:#241C14}
+.li.on .box{background:var(--amber);border-color:var(--amber)}
+.li.on .box::after{content:"";position:absolute;left:4px;top:4px;width:9px;height:5px;
+  border-left:2.5px solid #14110F;border-bottom:2.5px solid #14110F;transform:rotate(-45deg)}
+.li .nm{flex:1;font-size:15px;font-weight:600}
+.li .nm em{font-style:normal;display:block;font-size:11.5px;color:var(--dim);font-weight:500}
+.li .vl{font-weight:650;font-size:15px}
+.li .bt{padding:5px 10px;border-radius:8px;background:var(--surf2);color:var(--amber);
+  font-size:11.5px;font-weight:700}
+.tot{padding:13px 15px;background:var(--surf2);display:flex;justify-content:space-between;
+  align-items:baseline;border-top:1px solid var(--line)}
+.tot span{color:var(--dim);font-size:14px}
+.tot b{font-size:23px;font-weight:700;letter-spacing:-.03em}
+
+.nota{background:var(--surf);border-left:3px solid var(--amber);border-radius:0 12px 12px 0;
+  padding:15px 17px;margin:18px 0;font-size:15.5px}
+.nota b{color:var(--amber)}
+.atencao{border-left-color:var(--alerta)}
+.atencao b{color:var(--alerta)}
+
+.cartao{background:var(--surf);border:1px solid var(--line);border-radius:14px;
+  padding:17px;margin-bottom:11px}
+.cartao b{display:block;margin-bottom:4px;font-size:16.5px;font-weight:650}
+.cartao span{color:var(--dim);font-size:15px}
+
+table.faq{width:100%;border-collapse:collapse;font-size:15.5px}
+table.faq td{padding:13px 0;border-bottom:1px solid var(--line);vertical-align:top}
+table.faq td:first-child{font-weight:650;padding-right:16px;width:44%}
+table.faq td:last-child{color:var(--dim)}
+
+.rodape{padding:34px 0 52px;text-align:center;color:var(--faint);font-size:14.5px}
+.imprimir{position:fixed;right:16px;bottom:calc(16px + env(safe-area-inset-bottom,0px));
+  background:var(--amber);color:var(--base);border:0;padding:13px 19px;border-radius:12px;
+  font:inherit;font-weight:700;font-size:15px;cursor:pointer;box-shadow:0 5px 20px rgba(0,0,0,.4)}
+
+@media print{
+  :root{--base:#fff;--surf:#F7F4F0;--surf2:#EDE8E2;--line:#D6CEC6;
+    --ink:#14110F;--dim:#5C534C;--faint:#8A7F76;--amber:#B4661A}
+  body{font-size:12pt}
+  .imprimir{display:none}
+  .passo{border-bottom:1px solid var(--line)}
+  .wrap{max-width:none}
+}
+</style>
+</head>
+<body>
+<div class="wrap">
+
+  <div class="capa">
+    <div class="et">DIVIDE AÍ</div>
+    <h1>Como usar</h1>
+    <p>Manual do garçom. Cinco passos, e você nunca mais divide conta na calculadora.</p>
+  </div>
+
+  <div class="passo">
+    <div class="cab"><div class="n">1</div><h2>Abrir a mesa</h2></div>
+    <p>Na tela inicial, toque em <b>+ Abrir mesa</b> e digite o número dela.</p>
+    <div class="nota">Pode ter quantas mesas quiser abertas ao mesmo tempo.
+      Cada uma aparece na tela inicial com <b>quanto ainda falta pagar</b>.</div>
+  </div>
+
+  <div class="passo">
+    <div class="cab"><div class="n">2</div><h2>Criar as comandas</h2></div>
+    <p>Toque em <b>+ comanda</b> para cada pessoa da mesa. Use o nome ou algo que
+      ajude a lembrar: “camisa azul”, “aniversariante”, “casal”.</p>
+    <div class="tela">
+      <div class="barra">Mesa 7 <b>faltam R$ 214,70</b></div>
+      <div class="chips">
+        <span class="chip on">Tudo<em>R$ 214,70</em></span>
+        <span class="chip">Compartilhado<em>R$ 112,00</em></span>
+        <span class="chip">Camisa azul<em>R$ 97,90</em></span>
+        <span class="chip">Aniversariante<em>R$ 82,00</em></span>
+        <span class="chip">+ comanda</span>
+      </div>
+    </div>
+    <div class="nota">Cada comanda mostra <b>o próprio valor</b>. Dá para ver a
+      qualquer momento quanto uma pessoa já consumiu, sem fechar a conta.</div>
+  </div>
+
+  <div class="passo">
+    <div class="cab"><div class="n">3</div><h2>Lançar o pedido</h2></div>
+    <p>Toque em <b>Lançar item</b>, escolha do cardápio, ajuste a quantidade e diga
+      <b>para quem</b>: uma comanda específica ou <b>Compartilhado</b>.</p>
+    <div class="nota"><b>Quando usar Compartilhado:</b> o que é da mesa toda e vai
+      ser rachado depois. Cerveja grande, porção, couvert. O que é de uma pessoa só
+      vai direto na comanda dela.</div>
+    <div class="nota"><b>Esqueceu de criar a comanda antes?</b> Dá para criar na hora
+      de lançar, no botão <b>+ nova</b> que aparece ali mesmo.</div>
+  </div>
+
+  <div class="passo">
+    <div class="cab"><div class="n">4</div><h2>Dividir o que foi de todos</h2></div>
+    <p>No item compartilhado, toque em <b>dividir</b>. Diga entre quantas pessoas,
+      e quantas partes esse cliente está levando.</p>
+    <div class="tela">
+      <div class="barra">Cerveja 600ml <b>R$ 35,00 em aberto</b></div>
+      <div style="padding:18px 15px;text-align:center">
+        <div style="color:var(--dim);font-size:14px">Dividir entre</div>
+        <div style="font-size:38px;font-weight:700;margin:4px 0" class="num">3</div>
+        <div style="color:var(--dim);font-size:14px">Cada pessoa paga</div>
+        <div style="font-size:29px;font-weight:700;color:var(--amber);margin:2px 0" class="num">R$ 11,67</div>
+      </div>
+    </div>
+    <div class="nota">Se uma pessoa bebeu por dois, é só marcar <b>2 partes</b>.
+      O app cobra o dobro dela e desconta certinho dos outros.</div>
+  </div>
+
+  <div class="passo">
+    <div class="cab"><div class="n">5</div><h2>Fechar e cobrar</h2></div>
+    <p>Toque na comanda da pessoa e depois em <b>Fechar esta comanda</b> — marca tudo
+      dela de uma vez. Some os compartilhados que ela vai pagar e pronto.</p>
+    <div class="tela">
+      <div class="barra">Fechando <b>Camisa azul</b></div>
+      <div class="li on"><span class="box"></span>
+        <span class="nm">Picanha na chapa<em>comanda dele</em></span>
+        <span class="vl num">R$ 89,90</span></div>
+      <div class="li on"><span class="box"></span>
+        <span class="nm">Cerveja 600ml<em>1/3 da compartilhada</em></span>
+        <span class="vl num">R$ 11,67</span></div>
+      <div class="li on"><span class="box"></span>
+        <span class="nm">Porção de fritas<em>1/3 da compartilhada</em></span>
+        <span class="vl num">R$ 14,00</span></div>
+      <div class="li"><span class="box"></span>
+        <span class="nm">Caipirinha ×2<em>comanda: aniversariante</em></span>
+        <span class="vl num">R$ 44,00</span></div>
+      <div class="tot"><span>Total a cobrar</span><b class="num">R$ 127,13</b></div>
+    </div>
+    <p>Toque em <b>Cobrar</b>. O valor aparece em letra grande — é esse que você
+      digita na maquininha. Escolha a forma de pagamento.</p>
+    <div class="nota atencao"><b>Só toque em “Recebi, dar baixa” depois que a
+      maquininha aprovar.</b> É esse toque que desconta os itens da mesa. Se der
+      baixa antes e o cartão for negado, a conta fica errada.</div>
+  </div>
+
+  <div class="passo">
+    <div class="cab"><div class="n">?</div><h2>Quando der ruim</h2></div>
+    <table class="faq">
+      <tr><td>Dei baixa errado</td>
+        <td>Aba <b>Pagos</b> → escolha a conta → <b>Estornar</b>. Os itens voltam para a mesa.
+          Isso não cancela nada na maquininha, só corrige aqui.</td></tr>
+      <tr><td>Cliente não quer pagar o serviço</td>
+        <td>Desmarque a caixinha <b>Serviço 10%</b> na barra de baixo, antes de cobrar.</td></tr>
+      <tr><td>Item apagado, não consigo marcar</td>
+        <td>É porque ele já foi todo pago. Está certo assim — o app não deixa cobrar duas vezes.</td></tr>
+      <tr><td>Chegou mais gente na mesa</td>
+        <td>Crie outra comanda a qualquer momento, mesmo com a mesa no meio.</td></tr>
+      <tr><td>Lancei na comanda errada</td>
+        <td>Avise o gerente para corrigir. Nesta versão o item não muda de comanda sozinho.</td></tr>
+      <tr><td>Mesa acabou</td>
+        <td>Quando o saldo chegar a zero, aparece <b>Encerrar mesa</b>. Ela sai da tela inicial.</td></tr>
+    </table>
+  </div>
+
+  <div class="passo" style="border-bottom:0">
+    <div class="cab"><div class="n">★</div><h2>Três coisas para não esquecer</h2></div>
+    <div class="cartao"><b>A comanda começa no primeiro pedido</b>
+      <span>Não deixe para organizar na hora de fechar. É aí que dá confusão.</span></div>
+    <div class="cartao"><b>Compartilhado é só o que é da mesa</b>
+      <span>Na dúvida, pergunte: “essa cerveja é de alguém ou de todo mundo?”</span></div>
+    <div class="cartao"><b>Baixa só depois de aprovado</b>
+      <span>Maquininha aprovou, aí sim você toca em dar baixa.</span></div>
+  </div>
+
+  <div class="rodape">
+    Problema com o app? Chame o suporte.<br>
+    <b style="color:var(--amber)">(81) 99964-9347</b>
+  </div>
+</div>
+
+<button class="imprimir" onclick="window.print()">Imprimir</button>
+</body>
+</html>
