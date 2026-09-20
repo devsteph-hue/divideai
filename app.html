@@ -144,6 +144,18 @@ label.rot{display:block;font-size:13px;color:var(--ink-dim);margin-bottom:5px;fo
 .rodada .top{display:flex;justify-content:space-between;font-weight:650;margin-bottom:5px}
 .rodada .det{font-size:12.5px;color:var(--ink-dim);line-height:1.6}
 .rodada .estorno{color:var(--alerta);font-size:12.5px;font-weight:600;margin-top:8px}
+.acoes-cardapio{display:grid;grid-template-columns:1fr 1fr;gap:9px;margin-bottom:18px}
+.acao-card{background:var(--surf);border:1px solid var(--amber-dark);border-radius:14px;
+  padding:16px 13px;text-align:left}
+.acao-card b{display:block;font-size:15px;font-weight:650;color:var(--amber);margin-bottom:3px}
+.acao-card span{font-size:12.5px;color:var(--ink-dim);line-height:1.4;display:block}
+.titulo-lista{font-size:12.5px;color:var(--ink-faint);font-weight:600;margin-bottom:9px}
+.atalho{display:flex;width:100%;align-items:center;justify-content:space-between;gap:10px;
+  background:var(--surf);border:1px solid var(--line);border-radius:13px;padding:14px 16px;
+  margin-top:14px;text-align:left}
+.atalho b{display:block;font-size:15.5px;font-weight:650}
+.atalho em{font-style:normal;display:block;font-size:12.5px;color:var(--ink-dim);margin-top:2px}
+.atalho i{font-style:normal;font-size:22px;color:var(--ink-faint)}
 .cardapio-item.avulso{border-style:dashed;border-color:var(--amber-dark);color:var(--amber)}
 .barrinha{height:8px;background:var(--surf2);border-radius:5px;overflow:hidden;margin-top:12px}
 .barrinha i{display:block;height:100%;background:var(--amber);transition:width .3s}
@@ -452,7 +464,11 @@ function render(){
           <b>${dias<=1?'Vence hoje':'Vence em '+dias+' dias'}</b> · renovar →</button>`);
     }
     $('tela').insertAdjacentHTML('beforeend',
-      `<button class="ajuda" onclick="telaAjuda()">Como usar o app</button>`);
+      `<button class="atalho" onclick="vista.tela='cardapio';render()">
+         <span><b>Cardápio</b><em>${S.cardapio.length} ${
+           S.cardapio.length===1?'item':'itens'} · cadastrar por foto ou na mão</em></span>
+         <i>›</i></button>
+       <button class="ajuda" onclick="telaAjuda()">Como usar o app</button>`);
   } else if(vista.tela==='cardapio'){
     $('titulo').innerHTML='Cardápio<span class="sub">Itens e preços</span>';
     telaCardapio();
@@ -460,10 +476,15 @@ function render(){
     const s=saldoMesa(m);
     $('titulo').innerHTML=`Mesa ${esc(m.numero)}<span class="sub">${
       s>0?`faltam ${brl(s)}`:'conta quitada'}</span>`;
+    $('btnHeader').hidden=false;$('btnHeader').textContent='Cardápio';
+    $('btnHeader').onclick=()=>{vista.tela='cardapio';render()};
     telaMesa(m);
   }
 }
 $('btnVoltar').onclick=()=>{
+  if(vista.tela==='cardapio'){
+    vista.tela=vista.mesaId?'mesa':'mesas';render();return;
+  }
   if(vista.tela==='mesa'&&Object.keys(vista.sel).length){vista.sel={};render();return}
   vista.tela='mesas';vista.mesaId=null;vista.sel={};render();
 };
@@ -794,13 +815,22 @@ window.encerrar=()=>{
 
 /* --- cardápio --- */
 function telaCardapio(){
-  $('tela').innerHTML=S.cardapio.map(p=>`
-    <button class="cardapio-item" onclick="editarProduto('${p.id}')">
-      <span class="n">${esc(p.nome)}</span><span class="p num">${brl(p.preco)}</span></button>`).join('');
-  $('barra').innerHTML=
-    `<button class="acao" onclick="editarProduto(null)">Adicionar produto</button>
-     <button class="acao sec" style="margin-top:8px" onclick="importarFoto()">
-       Ler cardápio de uma foto</button>`;
+  $('tela').innerHTML=
+    `<div class="acoes-cardapio">
+       <button class="acao-card" onclick="importarFoto()">
+         <b>📷 Ler de uma foto</b><span>Fotografe o cardápio e ele cadastra</span></button>
+       <button class="acao-card" onclick="editarProduto(null)">
+         <b>✏️ Digitar um item</b><span>Cadastrar na mão, um por um</span></button>
+     </div>
+     <div class="titulo-lista">${S.cardapio.length} ${
+       S.cardapio.length===1?'item cadastrado':'itens cadastrados'}</div>`
+    + (S.cardapio.length
+       ? S.cardapio.map(p=>`
+         <button class="cardapio-item" onclick="editarProduto('${p.id}')">
+           <span class="n">${esc(p.nome)}</span><span class="p num">${brl(p.preco)}</span></button>`).join('')
+       : `<div class="vazio"><strong>Cardápio vazio</strong>
+          Use um dos dois botões acima para começar.</div>`);
+  $('barra').innerHTML='';
 }
 /* ---- leitura de cardápio por foto (OCR no próprio navegador) ---- */
 let lidos=[];
