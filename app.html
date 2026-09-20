@@ -144,6 +144,21 @@ label.rot{display:block;font-size:13px;color:var(--ink-dim);margin-bottom:5px;fo
 .rodada .top{display:flex;justify-content:space-between;font-weight:650;margin-bottom:5px}
 .rodada .det{font-size:12.5px;color:var(--ink-dim);line-height:1.6}
 .rodada .estorno{color:var(--alerta);font-size:12.5px;font-weight:600;margin-top:8px}
+.cardapio-item.avulso{border-style:dashed;border-color:var(--amber-dark);color:var(--amber)}
+.barrinha{height:8px;background:var(--surf2);border-radius:5px;overflow:hidden;margin-top:12px}
+.barrinha i{display:block;height:100%;background:var(--amber);transition:width .3s}
+.lidos{max-height:46vh;overflow-y:auto;margin-bottom:14px}
+.lido{display:flex;align-items:center;gap:8px;margin-bottom:7px}
+.lido.off{opacity:.38}
+.lido .bx{width:26px;height:26px;flex:none;border-radius:7px;border:2px solid var(--ink-faint);
+  background:var(--amber);border-color:var(--amber);position:relative}
+.lido.off .bx{background:transparent;border-color:var(--ink-faint)}
+.lido .bx::after{content:"";position:absolute;left:5px;top:6px;width:11px;height:6px;
+  border-left:2.5px solid #14110F;border-bottom:2.5px solid #14110F;transform:rotate(-45deg)}
+.lido.off .bx::after{display:none}
+.lido .campo{margin:0;padding:11px;font-size:15px}
+.lido .nome{flex:1;min-width:0}
+.lido .preco{width:90px;flex:none;text-align:right}
 .cartao-e{background:var(--surf2);border-radius:12px;padding:13px 15px;margin-bottom:8px}
 .cartao-e b{display:block;font-size:15.5px;font-weight:650;margin-bottom:2px}
 .cartao-e span{color:var(--ink-dim);font-size:14.5px;line-height:1.45}
@@ -629,12 +644,41 @@ window.abrirLancar=()=>{
 };
 window.filtrarCardapio=()=>{
   const q=($('busca')?.value||'').toLowerCase();
-  $('listaProd').innerHTML=S.cardapio.filter(p=>p.nome.toLowerCase().includes(q))
-    .map(p=>`<button class="cardapio-item" onclick="escolherProduto('${p.id}')">
+  const achados=S.cardapio.filter(p=>p.nome.toLowerCase().includes(q));
+  $('listaProd').innerHTML=
+    `<button class="cardapio-item avulso" onclick="itemAvulso()">
+      <span class="n">+ Item que não está no cardápio</span></button>`
+    + (achados.map(p=>`<button class="cardapio-item" onclick="escolherProduto('${p.id}')">
       <span class="n">${esc(p.nome)}</span><span class="p num">${brl(p.preco)}</span></button>`).join('')
-    ||`<div class="vazio">Nada encontrado.</div>`;
+      ||`<div class="vazio">Nada encontrado no cardápio.</div>`);
 };
 let qtdTmp=1,prodTmp=null,destTmp=null;
+window.itemAvulso=()=>{
+  modal(`<h2>Item fora do cardápio</h2>
+    <p class="dica">Para aquele pedido que não está na lista. Vale só nesta mesa.</p>
+    <label class="rot" for="avN">O que é</label>
+    <input class="campo" id="avN" placeholder="Dose de whisky" autocomplete="off">
+    <label class="rot" for="avP">Preço da unidade</label>
+    <input class="campo" id="avP" inputmode="decimal" placeholder="28,00">
+    <label style="display:flex;gap:9px;align-items:center;margin:4px 0 14px;font-size:14.5px;
+      color:var(--ink-dim)">
+      <input type="checkbox" id="avS" style="width:18px;height:18px;accent-color:var(--amber)">
+      Salvar também no cardápio</label>
+    <button class="acao" onclick="confirmarAvulso()">Continuar</button>`);
+  setTimeout(()=>$('avN')?.focus(),80);
+};
+window.confirmarAvulso=()=>{
+  const nome=$('avN').value.trim();
+  const preco=Math.round(parseFloat(($('avP').value||'').replace(/\./g,'').replace(',','.'))*100);
+  if(!nome||!Number.isFinite(preco)||preco<=0){toast('Preencha nome e preço');return}
+  if($('avS').checked){
+    prodTmp={id:'c'+Date.now(),nome,preco,comp:true};
+    S.cardapio.push(prodTmp);salvar();
+  } else {
+    prodTmp={id:'avulso'+Date.now(),nome,preco,comp:true};
+  }
+  qtdTmp=1;desenhaProduto();
+};
 window.escolherProduto=pid=>{
   prodTmp=S.cardapio.find(p=>p.id===pid);qtdTmp=1;
   const f=vista.filtro||'todos';
@@ -753,8 +797,124 @@ function telaCardapio(){
   $('tela').innerHTML=S.cardapio.map(p=>`
     <button class="cardapio-item" onclick="editarProduto('${p.id}')">
       <span class="n">${esc(p.nome)}</span><span class="p num">${brl(p.preco)}</span></button>`).join('');
-  $('barra').innerHTML=`<button class="acao" onclick="editarProduto(null)">Adicionar produto</button>`;
+  $('barra').innerHTML=
+    `<button class="acao" onclick="editarProduto(null)">Adicionar produto</button>
+     <button class="acao sec" style="margin-top:8px" onclick="importarFoto()">
+       Ler cardápio de uma foto</button>`;
 }
+/* ---- leitura de cardápio por foto (OCR no próprio navegador) ---- */
+let lidos=[];
+window.importarFoto=()=>{
+  modal(`<h2>Ler cardápio de uma foto</h2>
+    <p class="dica">Tire foto do cardápio ou escolha da galeria. Pode mandar várias páginas
+      de uma vez. Depois você confere o que ele leu antes de cadastrar.</p>
+    <div class="cartao-e"><b>Para ler bem</b><span>Foto reta, de frente, com boa luz.
+      Uma coluna por foto funciona melhor que a página inteira torta.</span></div>
+    <input type="file" id="fotos" accept="image/*" multiple style="display:none"
+      onchange="lerFotos(this.files)">
+    <button class="acao" onclick="$('fotos').click()">Escolher fotos</button>
+    <button class="acao sec" style="margin-top:8px" onclick="fecharModal()">Cancelar</button>`);
+};
+function carregarOCR(){
+  return new Promise((ok,erro)=>{
+    if(window.Tesseract)return ok();
+    const t=document.createElement('script');
+    t.src='https://cdn.jsdelivr.net/npm/tesseract.js@5/dist/tesseract.min.js';
+    t.onload=()=>ok();t.onerror=()=>erro(new Error('sem conexão'));
+    document.head.appendChild(t);
+  });
+}
+/** Procura linhas no formato "nome .... 35,00" */
+function extrairItens(texto){
+  const fora=/^(cardápio|cardapio|menu|bebidas|porções|porcoes|pratos|sobremesas|drinks|entradas|total)$/i;
+  const achados=[];
+  texto.split(/\n+/).forEach(linha=>{
+    const l=linha.replace(/\s+/g,' ').trim();
+    if(l.length<4||fora.test(l))return;
+    const m=l.match(/^(.{3,60}?)[\s.\-–—•:]*R?\$?\s*(\d{1,4})[.,](\d{2})\s*$/);
+    if(!m)return;
+    const nome=m[1].replace(/[.\-–—•:]+$/,'').trim();
+    const preco=parseInt(m[2],10)*100+parseInt(m[3],10);
+    if(nome.length<3||preco<=0||preco>5000000)return;
+    if(!/[a-zA-ZÀ-ú]{3}/.test(nome))return;
+    achados.push({nome,preco,usar:true});
+  });
+  return achados;
+}
+window.lerFotos=async files=>{
+  if(!files||!files.length)return;
+  const arr=[...files];
+  modal(`<h2>Lendo</h2><p class="dica" id="statusOcr">Preparando…</p>
+    <div class="barrinha"><i id="prog" style="width:4%"></i></div>
+    <p class="dica" style="margin-top:14px">Na primeira vez ele baixa o leitor, o que demora
+      um pouco. Das próximas é mais rápido. Não feche a tela.</p>`);
+  try{ await carregarOCR(); }
+  catch(e){
+    modal(`<h2>Sem conexão</h2><p class="dica">A leitura por foto precisa de internet na
+      primeira vez, para baixar o leitor. Conecte e tente de novo — ou cadastre na mão.</p>
+      <button class="acao" onclick="fecharModal()">Entendi</button>`);
+    return;
+  }
+  lidos=[];
+  try{
+    const worker=await Tesseract.createWorker('por');
+    for(let i=0;i<arr.length;i++){
+      $('statusOcr').textContent=`Foto ${i+1} de ${arr.length}…`;
+      const r=await worker.recognize(arr[i]);
+      lidos=lidos.concat(extrairItens(r.data.text||''));
+      $('prog').style.width=Math.round((i+1)/arr.length*100)+'%';
+    }
+    await worker.terminate();
+  }catch(e){
+    modal(`<h2>Não consegui ler</h2><p class="dica">${esc(String(e.message||e))}</p>
+      <button class="acao" onclick="fecharModal()">Fechar</button>`);
+    return;
+  }
+  // tira repetidos
+  const vistos=new Set();
+  lidos=lidos.filter(x=>{const k=x.nome.toLowerCase();
+    if(vistos.has(k))return false;vistos.add(k);return true});
+  revisarLidos();
+};
+function revisarLidos(){
+  if(!lidos.length){
+    modal(`<h2>Não achei preços</h2>
+      <p class="dica">Ele procura linhas com nome e preço, tipo “Cerveja 600ml 35,00”.
+        Tente uma foto mais reta, mais perto, ou com uma coluna por vez.</p>
+      <button class="acao" onclick="importarFoto()">Tentar outra foto</button>
+      <button class="acao sec" style="margin-top:8px" onclick="fecharModal()">Cadastrar na mão</button>`);
+    return;
+  }
+  const n=lidos.filter(x=>x.usar).length;
+  modal(`<h2>Confira antes de cadastrar</h2>
+    <p class="dica">Ele leu ${lidos.length} ${lidos.length===1?'item':'itens'}.
+      Desmarque o que não presta e corrija o que saiu torto.</p>
+    <div class="lidos">${lidos.map((x,i)=>`
+      <div class="lido${x.usar?'':' off'}">
+        <button class="bx" onclick="alternarLido(${i})"></button>
+        <input class="campo nome" value="${esc(x.nome)}"
+          oninput="lidos[${i}].nome=this.value">
+        <input class="campo preco" inputmode="decimal" value="${(x.preco/100).toFixed(2).replace('.',',')}"
+          oninput="mudarPrecoLido(${i},this.value)">
+      </div>`).join('')}</div>
+    <button class="acao" onclick="confirmarImportacao()">Cadastrar ${n} ${n===1?'item':'itens'}</button>
+    <button class="acao sec" style="margin-top:8px" onclick="importarFoto()">Ler outra foto</button>`);
+}
+window.alternarLido=i=>{lidos[i].usar=!lidos[i].usar;revisarLidos()};
+window.mudarPrecoLido=(i,v)=>{
+  const p=Math.round(parseFloat(String(v).replace(/\./g,'').replace(',','.'))*100);
+  if(Number.isFinite(p))lidos[i].preco=p;
+};
+window.confirmarImportacao=()=>{
+  let n=0;
+  lidos.filter(x=>x.usar&&x.nome.trim()&&x.preco>0).forEach(x=>{
+    S.cardapio.push({id:'c'+Date.now()+Math.random().toString(36).slice(2,5),
+      nome:x.nome.trim(),preco:x.preco,comp:true});n++;
+  });
+  salvar();lidos=[];fecharModal();render();
+  toast(n+(n===1?' item cadastrado':' itens cadastrados'));
+};
+
 window.editarProduto=pid=>{
   const p=pid?S.cardapio.find(x=>x.id===pid):null;
   modal(`<h2>${p?'Editar produto':'Novo produto'}</h2>
