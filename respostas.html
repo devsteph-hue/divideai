@@ -1,0 +1,350 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Respostas rápidas — Divide Aí</title>
+<meta name="theme-color" content="#14110F">
+<style>
+:root{--base:#14110F;--surf:#1F1A17;--surf2:#2A2320;--line:#3A302A;
+  --ink:#F4EFE8;--dim:#A99C90;--faint:#6E635B;--amber:#E8912D;--pago:#6FA86B;--alerta:#D8604A;
+  box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);
+  padding-bottom:env(safe-area-inset-bottom,0px)}
+*,*::before,*::after{box-sizing:inherit}
+html{-webkit-text-size-adjust:100%}
+body{margin:0;background:var(--base);color:var(--ink);font-size:16px;line-height:1.5;
+  font-family:system-ui,-apple-system,"Segoe UI",Roboto,sans-serif;-webkit-font-smoothing:antialiased;
+  padding-bottom:40px}
+button{font:inherit;color:inherit;border:0;background:none;cursor:pointer;text-align:left}
+.wrap{max-width:620px;margin:0 auto;padding:0 16px}
+
+header{position:sticky;top:env(safe-area-inset-top,0px);z-index:9;background:var(--base);
+  border-bottom:1px solid var(--line);padding:16px 0 12px}
+h1{font-size:19px;margin:0 0 2px;font-weight:700;letter-spacing:-.02em}
+.sub{color:var(--dim);font-size:13px;margin:0 0 12px}
+#busca{width:100%;padding:13px 15px;border-radius:12px;background:var(--surf2);
+  border:1px solid var(--line);color:var(--ink);font-size:16px}
+#busca:focus{outline:2px solid var(--amber);outline-offset:1px}
+
+.links{display:grid;gap:7px;margin:16px 0 22px}
+.link{display:flex;align-items:center;gap:11px;background:var(--surf);border:1px solid var(--line);
+  border-radius:12px;padding:13px 15px;width:100%}
+.link .txt{flex:1;min-width:0}
+.link b{display:block;font-size:14.5px;font-weight:650}
+.link em{font-style:normal;display:block;font-size:12.5px;color:var(--amber);
+  overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.link i{font-style:normal;font-size:12px;color:var(--faint);font-weight:700;flex:none}
+
+.grupo{font-size:12.5px;color:var(--faint);font-weight:700;letter-spacing:.04em;
+  margin:26px 0 10px}
+.msg{background:var(--surf);border:1px solid var(--line);border-radius:13px;
+  margin-bottom:9px;overflow:hidden}
+.msg .cab{display:flex;align-items:center;gap:10px;padding:14px 15px;width:100%}
+.msg .cab .q{flex:1;font-size:15px;font-weight:650}
+.msg .cab .seta{font-size:13px;color:var(--faint);transition:transform .15s}
+.msg.aberta .cab .seta{transform:rotate(90deg)}
+.msg .corpo{display:none;padding:0 15px 14px}
+.msg.aberta .corpo{display:block}
+.msg pre{margin:0;white-space:pre-wrap;font-family:inherit;font-size:14.5px;line-height:1.6;
+  color:var(--dim);background:var(--surf2);border-radius:10px;padding:13px}
+.msg .copiar{margin-top:9px;width:100%;text-align:center;padding:11px;border-radius:10px;
+  background:var(--amber);color:var(--base);font-weight:700;font-size:14.5px}
+.tag{font-size:11px;font-weight:700;padding:2px 7px;border-radius:5px;flex:none}
+.tag.o{background:#2A1614;color:var(--alerta)}
+.tag.s{background:#1D2A1C;color:var(--pago)}
+.vazio{text-align:center;color:var(--dim);padding:40px 16px}
+.toast{position:fixed;left:50%;transform:translateX(-50%);bottom:24px;background:var(--ink);
+  color:var(--base);padding:11px 18px;border-radius:22px;font-weight:700;font-size:14px;z-index:20}
+.dica{background:var(--surf);border-left:3px solid var(--amber);border-radius:0 11px 11px 0;
+  padding:12px 15px;font-size:13.5px;color:var(--dim);margin:22px 0 4px;line-height:1.55}
+.dica b{color:var(--amber)}
+</style>
+</head>
+<body>
+<div class="wrap">
+  <header>
+    <h1>Respostas rápidas</h1>
+    <p class="sub">Toque para abrir, toque de novo para copiar.</p>
+    <input id="busca" placeholder="Buscar: preço, internet, chave…" oninput="filtrar()" autocomplete="off">
+  </header>
+
+  <div class="links" id="links"></div>
+  <div id="lista"></div>
+
+  <div class="dica"><b>Guarde este arquivo na tela do celular.</b>
+    No navegador, menu → Adicionar à tela de início. Assim você acha em dois toques
+    no meio de uma conversa.</div>
+</div>
+
+<script>
+const APP   = 'https://devsteph-hue.github.io/divideai';
+const PIX   = '81999649347';          // troque se sua chave Pix for outra
+const FONE  = '(81) 99964-9347';
+
+const LINKS = [
+  ['Site de venda',  APP,                 'mandar para o cliente'],
+  ['App direto',     APP + '/app.html',   'quem quer só testar'],
+  ['Manual online',  APP + '/manual.html','como usar, passo a passo'],
+  ['Chave Pix',      PIX,                 'para receber'],
+];
+
+const MSGS = [
+['PRIMEIRO CONTATO', [
+['Abordagem por WhatsApp', '',
+`Oi, tudo bem? Sou a Jully.
+
+Trabalho com um aplicativo que resolve a divisão de conta de mesa — aquela hora em que a mesa grande pede a conta separada e o garçom acaba fazendo na calculadora.
+
+O garçom marca no celular o que cada um consumiu, divide a cerveja e a porção num toque, e sai o valor certo de cada pessoa.
+
+Dá para ver funcionando aqui, tem uma mesa de exemplo pronta:
+${APP}
+
+Se fizer sentido pra sua casa, me chama.`],
+
+['Abordagem presencial (roteiro)', '',
+`NÃO comece falando do app. Comece perguntando:
+
+"Como vocês fazem quando uma mesa grande pede a conta separada?"
+
+Deixe ele reclamar. Ele vai falar da demora, do garçom errando, da fila no caixa.
+
+Aí abra o celular: entre na mesa de exemplo, divida a cerveja por 3 e feche a comanda de uma pessoa. Um minuto.
+
+Depois: "Fica no celular que vocês já têm. R$ 149, paga uma vez e é seu."
+
+Se hesitar: "Instala agora e usa hoje à noite de graça. Se resolver, a gente acerta amanhã."`],
+
+['Indicação de outro cliente', '',
+`Oi! O pessoal do [BAR QUE INDICOU] me passou seu contato.
+
+Eles usam um app que fiz para dividir conta de mesa — comanda por pessoa, e na hora de fechar o garçom marca o que cada um consumiu sem fazer conta.
+
+Deixo você testar sem compromisso: ${APP}
+
+Qualquer coisa estou aqui.`],
+]],
+
+['QUANDO PERGUNTAM', [
+['Quanto custa?', '',
+`R$ 149, pagamento único. Sem mensalidade, sem fidelidade, sem renovação.
+
+Paga uma vez e é seu, naquele aparelho, para sempre.`],
+
+['Como funciona?', '',
+`Você abre no celular ou tablet que já tem — não precisa comprar nada nem baixar da loja.
+
+Fica um ícone na tela, igual a qualquer app, e funciona até sem internet.
+
+Cada garçom abre a mesa, cria uma comanda por pessoa e vai lançando o pedido no nome de quem pediu. Na hora de pagar, marca a comanda e o app mostra o valor. Cerveja e porção compartilhadas, divide num toque.
+
+Pode testar à vontade antes: ${APP}`],
+
+['Preciso de maquininha nova?', '',
+`Não. Ele funciona em qualquer celular ou tablet, inclusive no que você já usa.
+
+O app calcula o valor de cada pessoa e mostra na tela. O garçom digita esse valor na maquininha que vocês já têm, normalmente.`],
+
+['E se acabar a internet?', '',
+`Continua funcionando. Depois de instalado, ele roda offline.
+
+Wi-fi de bar cai mesmo, por isso fiz assim. Os dados ficam salvos no próprio aparelho.`],
+
+['Meu garçom não sabe mexer', '',
+`Ele vai saber. O app foi feito pensando nisso: botão grande, letra grande e três toques para fechar uma conta.
+
+Tem um guia dentro do app e eu mando um PDF de uma página explicando. E qualquer dúvida eu respondo aqui no WhatsApp.
+
+Deixa ele testar dez minutos que você vai ver.`],
+
+['Funciona em quantos celulares?', '',
+`A chave vale para um aparelho. Se você quiser em dois celulares, são duas chaves.
+
+Uma coisa importante para eu ser honesta: nesta versão os aparelhos não conversam entre si. Cada um tem as mesas dele.
+
+Se cada garçom cuida das próprias mesas, funciona bem. Se vários mexem na mesma mesa ao mesmo tempo, ainda não atende.`],
+]],
+
+['OBJEÇÕES', [
+['Vou pensar', 'o',
+`Claro, sem pressa.
+
+Deixa o app instalado no seu celular enquanto isso — é de graça para testar e tem uma mesa de exemplo pronta: ${APP}
+
+Use numa noite movimentada e veja se ajuda. Se não ajudar, é só apagar.`],
+
+['Está caro', 'o',
+`Entendo. Pensa assim: é menos que uma mesa de casal numa sexta.
+
+E não tem mensalidade. Paga uma vez e acabou — daqui a dois anos você não paga nada de novo.
+
+Se preferir, tenho plano de 1 mês por R$ 29 para você testar sem compromisso. Se gostar, migra para o definitivo.`],
+
+['Já tenho sistema de comanda', 'o',
+`Ótimo, então a parte de pedido você já tem resolvida.
+
+Minha pergunta é outra: seu sistema divide item compartilhado? Tipo uma cerveja de R$ 35 rachada entre três, com o valor exato de cada um?
+
+Se divide, você não precisa de mim mesmo. Se não divide, é exatamente esse buraco que ele tapa — e os dois podem conviver.`],
+
+['Vou falar com meu sócio', 'o',
+`Perfeito. Manda esse link para ele ver: ${APP}
+
+Abre no celular dele e já tem uma mesa de exemplo montada. Em um minuto ele entende.
+
+Fico à disposição para qualquer dúvida dos dois.`],
+
+['Não respondeu (3 dias depois)', 'o',
+`Oi! Passando só para saber se chegou a testar.
+
+Se ficou alguma dúvida ou faltou alguma coisa para o seu jeito de trabalhar, me fala — quero entender para melhorar.
+
+E se não for o momento, sem problema nenhum. Fico por aqui.`],
+]],
+
+['FECHANDO A VENDA', [
+['Mandar o Pix', '',
+`Fechado!
+
+Chave Pix: ${PIX}
+Valor: R$ 149
+
+Assim que cair eu já te mando a chave de ativação.`],
+
+['Pedir o código do aparelho', '',
+`Recebi, obrigado!
+
+Agora preciso de uma coisa só: abre o app, toca na faixa laranja escrito "Modo demonstração" e me manda as 6 letras que aparecem.
+
+É o código do seu celular — a chave é feita em cima dele, por isso preciso desse número.`],
+
+['Entregar a chave', '',
+`Pronto! Sua chave de ativação:
+
+[COLE A CHAVE AQUI]
+
+Abre o app, toca em Ativar e digita. Ela não expira e vale para sempre neste aparelho.
+
+Guarde esta mensagem. Se precisar trocar de celular, me chama que eu gero outra sem custo.
+
+Anexei um guia de uma página com o passo a passo. Qualquer dúvida, é só chamar.`],
+
+['Oferecer ajuda com o cardápio', '',
+`Uma dica para começar bem: cadastre o cardápio antes da primeira noite.
+
+Se você tiver o cardápio digitado em algum lugar — PDF, Word, ou aquela mensagem que vocês mandam para os clientes — me manda que eu te mostro como colar tudo de uma vez. Leva cinco minutos.
+
+Cardápio pronto é o que faz o garçom usar de verdade no primeiro dia.`],
+
+['Voltar no terceiro dia', 's',
+`Oi! Conseguiu usar o app na casa?
+
+Queria saber se funcionou na prática e se travou alguma coisa. Se tiver qualquer ajuste que faça sentido, me fala que eu vejo o que dá para fazer.`],
+]],
+
+['SUPORTE', [
+['Trocou de celular', 's',
+`Sem problema! A chave é ligada ao aparelho, então precisa de uma nova — sem custo.
+
+Abre o app no celular novo, toca na faixa "Modo demonstração" e me manda as 6 letras. Te mando a chave na hora.
+
+Só lembrando: as mesas e o cardápio do aparelho antigo não vão junto, precisa cadastrar o cardápio de novo.`],
+
+['A chave não funciona', 's',
+`Vamos conferir duas coisas:
+
+1. O código do aparelho que você me mandou é o mesmo que está aparecendo aí agora? Se você limpou os dados do navegador, ele muda.
+
+2. Digite a chave com os traços, em maiúsculas.
+
+Me manda o código que está aparecendo agora que eu gero outra.`],
+
+['Perdi tudo / sumiram as mesas', 's',
+`Calma, provavelmente não perdeu.
+
+Você está abrindo pelo ícone na tela ou pelo navegador? Os dados ficam separados entre os dois.
+
+Abre pelo ícone e me diz se as mesas voltaram.`],
+
+['Como atualizo o app?', 's',
+`Não precisa fazer nada. Quando eu melhoro alguma coisa, você já está com a versão nova na próxima vez que abrir.
+
+Se teimar em mostrar a versão antiga, fecha o app completamente e abre de novo pelo ícone.`],
+
+['Aviso de renovação', 's',
+`Oi! Seu acesso ao Divide Aí vence dia [DIA].
+
+Para renovar é só fazer o Pix e me mandar o código do aparelho de novo — aparece no app em Ativar. Mando a chave nova na hora.
+
+Suas mesas e seu cardápio continuam salvos, não perde nada.`],
+]],
+];
+
+/* ---------------------------------------------------------------- */
+const $ = id => document.getElementById(id);
+const esc = s => String(s).replace(/[&<>"]/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]));
+let dados = [];
+
+$('links').innerHTML = LINKS.map((l,i) =>
+  `<button class="link" onclick="copiarTxt(${i})">
+     <span class="txt"><b>${esc(l[0])}</b><em>${esc(l[1])}</em></span>
+     <i>COPIAR</i></button>`).join('');
+window.copiarTxt = i => copiar(LINKS[i][1], LINKS[i][0] + ' copiado');
+
+function montar(){
+  let n = 0;
+  dados = [];
+  $('lista').innerHTML = MSGS.map(([grupo, itens]) =>
+    `<div class="grupo">${grupo}</div>` + itens.map(([q, tag, txt]) => {
+      const id = n++;
+      dados.push({q, txt, grupo});
+      return `<div class="msg" id="m${id}" data-busca="${esc((q+' '+txt+' '+grupo).toLowerCase())}">
+        <button class="cab" onclick="abrir(${id})">
+          <span class="q">${esc(q)}</span>
+          ${tag === 'o' ? '<span class="tag o">objeção</span>'
+          : tag === 's' ? '<span class="tag s">suporte</span>' : ''}
+          <span class="seta">▶</span></button>
+        <div class="corpo"><pre>${esc(txt)}</pre>
+          <button class="copiar" onclick="copiarMsg(${id})">Copiar mensagem</button></div>
+      </div>`;
+    }).join('')).join('');
+}
+window.abrir = id => $('m'+id).classList.toggle('aberta');
+window.copiarMsg = id => copiar(dados[id].txt, 'Copiado');
+
+function copiar(txt, aviso){
+  if (navigator.clipboard) navigator.clipboard.writeText(txt).then(()=>toast(aviso));
+  else {
+    const t = document.createElement('textarea');
+    t.value = txt; document.body.appendChild(t); t.select();
+    document.execCommand('copy'); t.remove(); toast(aviso);
+  }
+}
+function toast(t){
+  const d = document.createElement('div');
+  d.className = 'toast'; d.textContent = t;
+  document.body.appendChild(d); setTimeout(()=>d.remove(), 1800);
+}
+window.filtrar = () => {
+  const q = $('busca').value.toLowerCase().trim();
+  let achou = 0;
+  document.querySelectorAll('.msg').forEach(m => {
+    const ok = !q || m.dataset.busca.includes(q);
+    m.style.display = ok ? '' : 'none';
+    if (ok) achou++;
+    if (q && ok) m.classList.add('aberta');
+    if (!q) m.classList.remove('aberta');
+  });
+  document.querySelectorAll('.grupo').forEach(g => {
+    let vis = false, e = g.nextElementSibling;
+    while (e && e.classList.contains('msg')) {
+      if (e.style.display !== 'none') vis = true;
+      e = e.nextElementSibling;
+    }
+    g.style.display = vis ? '' : 'none';
+  });
+};
+montar();
+</script>
+</body>
+</html>

@@ -1,0 +1,273 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Divide Aí — a conta da mesa dividida em três toques</title>
+<meta name="theme-color" content="#14110F">
+<style>
+:root{
+  --base:#14110F; --surf:#1F1A17; --surf2:#2A2320; --line:#3A302A;
+  --ink:#F4EFE8; --dim:#A99C90; --faint:#6E635B;
+  --amber:#E8912D; --pago:#6FA86B; --alerta:#D8604A;
+  box-sizing:border-box;
+  padding-top:env(safe-area-inset-top,0px);
+  padding-bottom:env(safe-area-inset-bottom,0px);
+}
+*,*::before,*::after{box-sizing:inherit}
+html{-webkit-text-size-adjust:100%}
+body{margin:0;background:var(--base);color:var(--ink);
+  font-family:system-ui,-apple-system,"Segoe UI",Roboto,sans-serif;
+  font-size:17px;line-height:1.55;-webkit-font-smoothing:antialiased}
+.wrap{max-width:560px;margin:0 auto;padding:0 20px}
+.num{font-variant-numeric:tabular-nums;letter-spacing:-.02em}
+
+/* abertura: a cena do problema */
+.hero{padding:56px 0 44px;border-bottom:1px solid var(--line)}
+.marca{font-size:13px;color:var(--amber);font-weight:700;letter-spacing:.04em;margin-bottom:26px}
+h1{margin:0 0 18px;font-size:34px;line-height:1.14;font-weight:700;letter-spacing:-.035em}
+.hero p{margin:0;color:var(--dim);font-size:18px}
+
+/* a cena */
+.cena{background:var(--surf);border:1px solid var(--line);border-radius:16px;
+  padding:20px;margin:30px 0}
+.cena .fala{font-size:17px;line-height:1.5;margin:0 0 14px}
+.cena .fala:last-child{margin:0}
+.cena .quem{color:var(--amber);font-weight:650}
+.conta-velha{font-family:ui-monospace,SFMono-Regular,Menlo,monospace;font-size:14px;
+  background:var(--base);border-radius:10px;padding:14px;margin-top:16px;color:var(--dim);
+  line-height:1.9}
+.conta-velha .risco{text-decoration:line-through;opacity:.5}
+
+section{padding:44px 0;border-bottom:1px solid var(--line)}
+h2{margin:0 0 8px;font-size:24px;font-weight:700;letter-spacing:-.025em;line-height:1.2}
+.sub{color:var(--dim);margin:0 0 26px}
+
+/* os três toques */
+.toque{display:flex;gap:16px;margin-bottom:22px;align-items:flex-start}
+.toque .n{width:34px;height:34px;flex:none;border-radius:11px;background:var(--amber);
+  color:var(--base);display:grid;place-items:center;font-weight:700;font-size:16px}
+.toque h3{margin:5px 0 4px;font-size:17px;font-weight:650}
+.toque p{margin:0;color:var(--dim);font-size:15.5px}
+
+/* simulação da tela */
+.tela{background:var(--surf);border:1px solid var(--line);border-radius:16px;
+  overflow:hidden;margin:28px 0}
+.tela .topo{padding:12px 16px;border-bottom:1px solid var(--line);font-size:13px;color:var(--dim)}
+.tela .topo b{color:var(--ink);font-size:15px;display:block;font-weight:650}
+.item{display:flex;align-items:center;gap:12px;padding:13px 16px;border-bottom:1px solid var(--line)}
+.item:last-of-type{border-bottom:0}
+.item .box{width:22px;height:22px;flex:none;border-radius:6px;border:2px solid var(--faint)}
+.item.on{background:#241C14}
+.item.on .box{background:var(--amber);border-color:var(--amber);position:relative}
+.item.on .box::after{content:"";position:absolute;left:5px;top:5px;width:9px;height:5px;
+  border-left:2.5px solid #14110F;border-bottom:2.5px solid #14110F;transform:rotate(-45deg)}
+.item .nm{flex:1;font-size:15px;font-weight:600}
+.item .nm em{font-style:normal;font-size:11px;color:var(--amber);display:block;font-weight:600}
+.item .vl{font-weight:650;font-size:15px}
+.tela .rodape{padding:14px 16px;background:var(--surf2);display:flex;
+  justify-content:space-between;align-items:baseline}
+.tela .rodape span{color:var(--dim);font-size:14px}
+.tela .rodape b{font-size:24px;font-weight:700;letter-spacing:-.03em}
+
+/* a conta que fecha */
+.prova{background:var(--surf);border:1px solid var(--line);border-left:3px solid var(--pago);
+  border-radius:14px;padding:20px;margin-top:24px}
+.prova table{width:100%;border-collapse:collapse;font-size:15px}
+.prova td{padding:5px 0}
+.prova td:last-child{text-align:right;font-weight:650}
+.prova tr.soma td{border-top:1px solid var(--line);padding-top:11px;color:var(--pago);
+  font-weight:700;font-size:16px}
+.prova p{margin:14px 0 0;font-size:14px;color:var(--dim)}
+
+.motivos{display:grid;gap:12px}
+.motivo{background:var(--surf);border:1px solid var(--line);border-radius:13px;padding:17px}
+.motivo b{display:block;margin-bottom:4px;font-size:16px;font-weight:650}
+.motivo span{color:var(--dim);font-size:15px}
+
+/* preço */
+.preco{text-align:center;padding:30px 20px;background:var(--surf);
+  border:1px solid var(--amber);border-radius:18px}
+.preco .linha1{color:var(--dim);font-size:15px}
+.preco .v{font-size:46px;font-weight:700;letter-spacing:-.04em;margin:4px 0;line-height:1}
+.preco .v small{font-size:17px;font-weight:600;color:var(--dim);letter-spacing:0}
+.preco .obs{color:var(--dim);font-size:14.5px;margin-top:10px;line-height:1.5}
+
+.cta{display:block;text-align:center;background:var(--amber);color:#14110F;
+  padding:19px;border-radius:14px;font-weight:700;font-size:18px;text-decoration:none;
+  margin:26px 0 12px;letter-spacing:-.01em}
+.cta.sec{background:var(--surf2);color:var(--ink);font-size:16px;border:1px solid var(--line)}
+footer{padding:36px 0 50px;text-align:center;color:var(--faint);font-size:14px}
+footer a{color:var(--amber)}
+@media(max-width:400px){h1{font-size:29px}}
+</style>
+</head>
+<body>
+<div class="wrap">
+
+  <div class="hero">
+    <div class="marca">DIVIDE AÍ</div>
+    <h1>Mesa de seis pedindo a conta separada não precisa parar seu salão.</h1>
+    <p>Comanda por pessoa e divisão de conta, no celular que você já tem.
+      Pagamento único de R$ 149.</p>
+  </div>
+
+  <section>
+    <h2>Sexta, 22h40</h2>
+    <p class="sub">A cena que se repete em todo bar cheio.</p>
+
+    <div class="cena">
+      <p class="fala"><span class="quem">Mesa 7:</span> “Pode trazer a conta? Mas separada, cada um paga o seu.”</p>
+      <p class="fala"><span class="quem">Garçom:</span> “Tá bom.” <em style="color:var(--dim)">E vai fazer na calculadora do celular.</em></p>
+      <div class="conta-velha">
+        cerveja 35,00 ÷ 3 = 11,66666...<br>
+        fritas 42,00 ÷ 3 = 14,00<br>
+        <span class="risco">picanha 89,90 (do da camisa azul)</span><br>
+        caipirinha ×2 = 44,00<br>
+        <span style="color:var(--alerta)">… e a mesa toda esperando.</span>
+      </div>
+    </div>
+
+    <p style="color:var(--dim);margin:0">Enquanto isso: fila no caixa, mesa ocupada que não gira,
+      e a chance de sair R$ 10 a menos sem ninguém perceber.</p>
+  </section>
+
+  <section>
+    <h2>Com o Divide Aí, são três toques</h2>
+    <p class="sub">Sem calculadora, sem papel, sem conferir duas vezes.</p>
+
+    <div class="toque"><div class="n">1</div><div>
+      <h3>Marca o que o cliente consumiu</h3>
+      <p>Cada pessoa já tem a comanda dela, montada desde o primeiro pedido.</p></div></div>
+
+    <div class="toque"><div class="n">2</div><div>
+      <h3>Divide o que foi de todos</h3>
+      <p>Cerveja por 3, porção por 4. Um toque e o app calcula a fração exata.</p></div></div>
+
+    <div class="toque"><div class="n">3</div><div>
+      <h3>Cobra e dá baixa</h3>
+      <p>O valor aparece em letra grande. O saldo da mesa desce sozinho.</p></div></div>
+
+    <div class="tela">
+      <div class="topo">Mesa 7 <b>faltam R$ 51,34</b></div>
+      <div class="item on"><span class="box"></span>
+        <span class="nm">Cerveja 600ml<em>dividida por 3 · levando 1/3</em></span>
+        <span class="vl num">R$ 11,67</span></div>
+      <div class="item on"><span class="box"></span>
+        <span class="nm">Porção de fritas<em>dividida por 3 · levando 1/3</em></span>
+        <span class="vl num">R$ 14,00</span></div>
+      <div class="item on"><span class="box"></span>
+        <span class="nm">Picanha na chapa<em>comanda: camisa azul</em></span>
+        <span class="vl num">R$ 89,90</span></div>
+      <div class="item"><span class="box"></span>
+        <span class="nm">Caipirinha ×2<em>comanda: aniversariante</em></span>
+        <span class="vl num">R$ 44,00</span></div>
+      <div class="rodape"><span>Total a cobrar</span><b class="num">R$ 127,13</b></div>
+    </div>
+  </section>
+
+  <section>
+    <h2>A conta fecha no centavo</h2>
+    <p class="sub">R$ 35,00 divididos por três não dão três valores iguais. O app resolve isso sem você pensar.</p>
+
+    <div class="prova">
+      <table>
+        <tr><td>Primeiro cliente</td><td class="num">R$ 11,67</td></tr>
+        <tr><td>Segundo cliente</td><td class="num">R$ 11,67</td></tr>
+        <tr><td>Terceiro cliente</td><td class="num">R$ 11,66</td></tr>
+        <tr class="soma"><td>Soma</td><td class="num">R$ 35,00</td></tr>
+      </table>
+      <p>A sobra de centavo é distribuída automaticamente. No fim da noite, a soma
+        de todas as contas individuais bate exatamente com o total da mesa.</p>
+    </div>
+  </section>
+
+  <section>
+    <h2>O que mais ele faz</h2>
+    <p class="sub"></p>
+    <div class="motivos">
+      <div class="motivo"><b>Comanda por pessoa</b>
+        <span>O pedido já entra no nome de quem pediu, desde a primeira rodada.</span></div>
+      <div class="motivo"><b>Várias mesas ao mesmo tempo</b>
+        <span>Cada uma com seu saldo, na tela inicial.</span></div>
+      <div class="motivo"><b>Não deixa cobrar duas vezes</b>
+        <span>Item já pago fica travado. Errou a baixa? Tem estorno.</span></div>
+      <div class="motivo"><b>Taxa de serviço com um toque</b>
+        <span>Liga e desliga por cliente, porque sempre tem quem tire.</span></div>
+      <div class="motivo"><b>Funciona sem internet</b>
+        <span>Depois de instalado, roda offline. Wi-fi de bar cai, e não pode parar o salão.</span></div>
+      <div class="motivo"><b>Seu cardápio, seus preços</b>
+        <span>Você mesmo cadastra os itens da sua casa, em minutos.</span></div>
+    </div>
+  </section>
+
+  <section>
+    <h2>Teste antes de pagar</h2>
+    <p class="sub">Abre no seu celular agora. Não precisa baixar nada nem cadastrar e-mail.</p>
+
+    <div class="toque"><div class="n">1</div><div>
+      <h3>Toque no botão abaixo</h3>
+      <p>Abre direto no navegador. Tem uma mesa de exemplo pronta, com comandas e uma
+        cerveja para dividir.</p></div></div>
+
+    <div class="toque"><div class="n">2</div><div>
+      <h3>Deixe o ícone na tela do celular</h3>
+      <p>No Android: menu do navegador → <b>Instalar aplicativo</b>.<br>
+         No iPhone: botão compartilhar → <b>Adicionar à Tela de Início</b>.<br>
+         Vira um ícone igual a qualquer outro app, e funciona sem internet.</p></div></div>
+
+    <div class="toque"><div class="n">3</div><div>
+      <h3>Gostou? Ative</h3>
+      <p>Toque em ativar, mande o código do aparelho no WhatsApp, faça o Pix e receba
+        sua chave. Leva dois minutos.</p></div></div>
+
+    <a class="cta sec" id="testar" href="#">Abrir o app agora</a>
+  </section>
+
+  <section>
+    <h2>Quanto custa</h2>
+    <p class="sub">Paga uma vez. Acabou.</p>
+    <div class="preco">
+      <div class="linha1">Pagamento único, sem mensalidade</div>
+      <div class="v num">R$ 149</div>
+      <div class="obs"><b>Uma compra libera todos os aparelhos da sua casa.</b><br>
+        Celular de cada garçom e cada maquininha, sem limite.<br>
+        Sem assinatura, sem renovação, sem cobrança surpresa.</div>
+    </div>
+
+    <div class="motivos" style="margin-top:22px">
+      <div class="motivo"><b>Não precisa instalar nada</b>
+        <span>Abre no navegador do celular ou tablet que você já tem.</span></div>
+      <div class="motivo"><b>Não precisa de treinamento</b>
+        <span>O app explica sozinho na primeira vez e tem o guia dentro dele.</span></div>
+      <div class="motivo"><b>Não precisa de internet para trabalhar</b>
+        <span>Depois de aberto, funciona offline. Wi-fi de bar cai, e o salão não pode parar.</span></div>
+      <div class="motivo"><b>Celular e maquininha, sem limite</b>
+        <span>Uma compra vale para a casa toda: o celular de cada garçom e todas as
+        maquininhas. Não é por aparelho.</span></div>
+    </div>
+
+    <a class="cta" id="zap" href="#">Tirar dúvida no WhatsApp</a>
+    <p style="text-align:center;color:var(--faint);font-size:14px;margin:0">
+      Respondo pessoalmente.</p>
+  </section>
+
+  <footer>
+    Divide Aí · Atendimento em Recife, Olinda e Paulista<br>
+    <a href="#" id="zap2">(81) 99964-9347</a>
+  </footer>
+</div>
+
+<script>
+// preencha estes dois valores antes de divulgar
+const WHATSAPP = '5581999649347';
+const LINK_APP = 'app.html';
+
+const msg = encodeURIComponent(
+  'Oi! Vi o Divide Aí e quero saber como funciona no meu estabelecimento.');
+document.getElementById('zap').href  = `https://wa.me/${WHATSAPP}?text=${msg}`;
+document.getElementById('zap2').href = `https://wa.me/${WHATSAPP}?text=${msg}`;
+document.getElementById('testar').href = LINK_APP;
+</script>
+</body>
+</html>

@@ -1,0 +1,1183 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="theme-color" content="#14110F">
+<meta name="mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+<meta name="apple-mobile-web-app-title" content="Divide Aí">
+<link rel="apple-touch-icon" href="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAMAAAADACAYAAABS3GwHAAACm0lEQVR42u3dPU5qURSGYTH2hISaGBsbB3kGSUNDCBPBERgs9t6sn+dpLa6e5D3r81qwOx72jzdo6t0jQAAgABAACAAEAAIAAYAAQAAgABAACAAEAAIAAYAAQAAgABAACAAEAAIAAYAAIIKPVf/QeTuVeWg/2/3Pr92ulzI/5+fXtwsAApj81qzy9q/01uzw9ncBcAE8AgRgBiEARgWcfT932f8CwAXwCBCA3wOGf99ZZ0Sn+eMC4AJ4BAjADJry/WabE93mjwuAC+ARIAAzCAEwI9Qsu7rj/hcALkDmtyu4AAkCjT4vus4fAeACVHnLggsAAoh5maLu7M77XwC4ABXftuACBAwy2tzoPn8EgACqv3XBBQgUYpTZYf4IAGIFYAbhAoAAal+gV+9v+z9wAGYQLgAIoPbledUMMX8EALED8HsALgAIoPbFWb3H7f9EAZhBuAAggNqXZtUsMX8SBmAG4QKAAKBpADNnUJSJNXuf2/8uAAgAUgYwY6pE+x+mWTPF/HEBQAAggKDzZ9ZcMX8KBeCvwrgAIABoGsCIGRR9So3a7fa/CwBP7Y6H/SPzD3DeTuV/eb5dL974LgAIAAQAAgABgABAACAAEAAIAAQAAgABgABAACAAEAAIAAGAAEAAIAAQAAgABAACAAGAAEAAIAAQAAgABAACAAGAACCFMB+S9+zD7lab9eF6//nAu1V8sJ4LgABAACAAEAAIAAQAAoDKwvwhDFwAEAAIAAQAAgABgABAACAAEAAIAAQAAgABgABAACAAEAAIAAQAAgABgABAAAgABAACAAGAAEAAIAAQAAgABAACAAGAAEAAIAAQAAgABAACAAGAAEAAIAAQAAgABAACAAGAAEAAIAAQAAgABAACAAHAOL9/11yn7daZugAAAABJRU5ErkJggg==">
+<link rel="icon" href="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAMAAAADACAYAAABS3GwHAAACm0lEQVR42u3dPU5qURSGYTH2hISaGBsbB3kGSUNDCBPBERgs9t6sn+dpLa6e5D3r81qwOx72jzdo6t0jQAAgABAACAAEAAIAAYAAQAAgABAACAAEAAIAAYAAQAAgABAACAAEAAIAAYAAIIKPVf/QeTuVeWg/2/3Pr92ulzI/5+fXtwsAApj81qzy9q/01uzw9ncBcAE8AgRgBiEARgWcfT932f8CwAXwCBCA3wOGf99ZZ0Sn+eMC4AJ4BAjADJry/WabE93mjwuAC+ARIAAzCAEwI9Qsu7rj/hcALkDmtyu4AAkCjT4vus4fAeACVHnLggsAAoh5maLu7M77XwC4ABXftuACBAwy2tzoPn8EgACqv3XBBQgUYpTZYf4IAGIFYAbhAoAAal+gV+9v+z9wAGYQLgAIoPbledUMMX8EALED8HsALgAIoPbFWb3H7f9EAZhBuAAggNqXZtUsMX8SBmAG4QKAAKBpADNnUJSJNXuf2/8uAAgAUgYwY6pE+x+mWTPF/HEBQAAggKDzZ9ZcMX8KBeCvwrgAIABoGsCIGRR9So3a7fa/CwBP7Y6H/SPzD3DeTuV/eb5dL974LgAIAAQAAgABgABAACAAEAAIAAQAAgABgABAACAAEAAIAAGAAEAAIAAQAAgABAACAAGAAEAAIAAQAAgABAACAAGAACCFMB+S9+zD7lab9eF6//nAu1V8sJ4LgABAACAAEAAIAAQAAoDKwvwhDFwAEAAIAAQAAgABgABAACAAEAAIAAQAAgABgABAACAAEAAIAAQAAgABgABAAAgABAACAAGAAEAAIAAQAAgABAACAAGAAEAAIAAQAAgABAACAAGAAEAAIAAQAAgABAACAAGAAEAAIAAQAAgABAACAAHAOL9/11yn7daZugAAAABJRU5ErkJggg==">
+<link rel="manifest" href="data:application/manifest+json;base64,eyJuYW1lIjogIkRpdmlkZSBBw60iLCAic2hvcnRfbmFtZSI6ICJEaXZpZGUgQcOtIiwgImRlc2NyaXB0aW9uIjogIkNvbWFuZGEgZSBkaXZpc8OjbyBkZSBjb250YSBwYXJhIGdhcsOnb25zIiwgInN0YXJ0X3VybCI6ICIuIiwgInNjb3BlIjogIi4iLCAiZGlzcGxheSI6ICJzdGFuZGFsb25lIiwgIm9yaWVudGF0aW9uIjogInBvcnRyYWl0IiwgImJhY2tncm91bmRfY29sb3IiOiAiIzE0MTEwRiIsICJ0aGVtZV9jb2xvciI6ICIjMTQxMTBGIiwgImxhbmciOiAicHQtQlIiLCAiaWNvbnMiOiBbeyJzcmMiOiAiZGF0YTppbWFnZS9wbmc7YmFzZTY0LGlWQk9SdzBLR2dvQUFBQU5TVWhFVWdBQUFNQUFBQURBQ0FZQUFBQlMzR3dIQUFBQ20wbEVRVlI0MnUzZFBVNXFVUlNHWVRIMmhJU2FHQnNiQjNrR1NVTkRDQlBCRVJnczl0NnNuK2RwTGE2ZTVEM3I4MXF3T3g3Mmp6ZG82dDBqUUFBZ0FCQUFDQUFFQUFJQUFZQUFRQUFnQUJBQUNBQUVBQUlBQVlBQVFBQWdBQkFBQ0FBRUFBSUFBWUFBSUlLUFZmL1FlVHVWZVdnLzIvM1ByOTJ1bHpJLzUrZlh0d3NBQXBqODFxenk5cS8wMXV6dzluY0JjQUU4QWdSZ0JpRUFSZ1djZlQ5MzJmOEN3QVh3Q0JDQTN3T0dmOTlaWjBTbitlTUM0QUo0QkFqQURKcnkvV2FiRTkzbWp3dUFDK0FSSUFBekNBRXdJOVFzdTdyai9oY0FMa0RtdHl1NEFBa0NqVDR2dXM0ZkFlQUNWSG5MZ2dzQUFvaDVtYUx1N003N1h3QzRBQlhmdHVBQ0JBd3kydHpvUG44RWdBQ3F2M1hCQlFnVVlwVFpZZjRJQUdJRllBYmhBb0FBYWwrZ1YrOXYrejl3QUdZUUxnQUlvUGJsZWRVTU1YOEVBTEVEOEhzQUxnQUlvUGJGV2IzSDdmOUVBWmhCdUFBZ2dOcVhadFVzTVg4U0JtQUc0UUtBQUtCcEFETm5VSlNKTlh1ZjIvOHVBQWdBVWdZd1k2cEUreCttV1RQRi9IRUJRQUFnZ0tEelo5WmNNWDhLQmVDdndyZ0FJQUJvR3NDSUdSUjlTbzNhN2ZhL0N3QlA3WTZIL1NQekQzRGVUdVYvZWI1ZEw5NzRMZ0FJQUFRQUFnQUJnQUJBQUNBQUVBQUlBQVFBQWdBQmdBQkFBQ0FBRUFBSUFBR0FBRUFBSUFBUUFBZ0FCQUFDQUFHQUFFQUFJQUFRQUFnQUJBQUNBQUdBQUNDRk1CK1M5K3pEN2xhYjllRjYvL25BdTFWOHNKNExnQUJBQUNBQUVBQUlBQVFBQW9ES3d2d2hERndBRUFBSUFBUUFBZ0FCZ0FCQUFDQUFFQUFJQUFRQUFnQUJnQUJBQUNBQUVBQUlBQVFBQWdBQmdBQkFBQWdBQkFBQ0FBR0FBRUFBSUFBUUFBZ0FCQUFDQUFHQUFFQUFJQUFRQUFnQUJBQUNBQUdBQUVBQUlBQVFBQWdBQkFBQ0FBR0FBRUFBSUFBUUFBZ0FCQUFDQUFIQU9MOS8xMXluN2RhWnVnQUFBQUJKUlU1RXJrSmdnZz09IiwgInNpemVzIjogIjE5MngxOTIiLCAidHlwZSI6ICJpbWFnZS9wbmciLCAicHVycG9zZSI6ICJhbnkifSwgeyJzcmMiOiAiZGF0YTppbWFnZS9wbmc7YmFzZTY0LGlWQk9SdzBLR2dvQUFBQU5TVWhFVWdBQUFnQUFBQUlBQ0FZQUFBRDBlTlQ2QUFBSTVrbEVRVlI0MnUzYU1VNXJRUXlHVVlMb28waXBJNVNHaGtYZVJhWkpFMFZzSkxSSUtXamc5M2ptbkFVODZYbFNmTmgzZHp6c0h5OEF3RkplalFBQUJBQUFJQUFBQUFFQUFBZ0FBRUFBQUFBQ0FBQVFBQUNBQUFBQUJBQUFJQUFBQUFFQUFBZ0FBRUFBQUFBQ0FBQVFBQUNBQUFBQUJBQUFDQUFBUUFBQUFBSUFBQkFBQUlBQUFBQUVBQUFnQUFBQUFRQUFDQUFBUUFBQUFBSUFBQkFBQUlBQUFBQUVBQUFnQUFBQUFRQUFDQUFBRUFBQWdBQUFBQVFBQUNBQUFBQUJBQUFJQUFCQUFBQUFBZ0FBRUFBQWdBQUFBQVFBQUNBQUFBQUJBQUFJQUFCQUFBQUFBZ0FBRUFBQUlBQUFBQUVBQUFnQUFFQUFBQUFDQUFBUUFBQ0FBQUFBQkFBQUlBQUFBQUVBQUFnQUFFQUFBQUFDQUFBUUFBQ0FBQUFBQkFBQUlBQUFRQUFBQUFJQUFCQUFBSUFBQUFBRUFBQWdBQUFBQVFBQUNBQUFRQUFBQUFJQUFCQUFBSUFBQUFBRUFBQWdBQUFBQVFBQUNBQUFRQUFBZ0FBd0FnQVFBQUNBQUFBQUJBQUFJQUFBQUFFQUFBZ0FBRUFBQUFBQ0FBQVFBQUNBQUFBQUJBQUFJQUFBQUFFQUFBZ0FBRUFBQUFBQ0FBQVFBQUFnQUFBQUFRQUFDQUFBUUFBQUFBSUFBQkFBQUlBQUFBQkc4bVlFdlYyMmt5SHc1SFA3K3ROLzczNjdHaXBQM3M4ZmhtQURBQUFJQU5yK3BZZmZoTC8wOEpzUUFBQ0FBQUFBQkFBQUlBQ280enNBRXI4Rk4xLzhGZ1FBQUNBQUFBQUJRQWxuQUJLL0FhdGYvQVlFQUFBZ0FBQUFBVUFKWndCdm4yQUZ2QzV2THdBQUFBRUFBQWdBQUVBQWtPVTdBRytlNEJhOEhtOHVBQUFBQVFBQUNBQ0c0QXpnclJPc2hOZmhyUVVBQUNBQUFBQUJ3RkNjQWJ4eGd0WHcvTHl4QUFBQUJBQUFJQUFBQUFIQUdId0g0RzBUM0lqbjVXMEZBQUFnQUFBQUFjRFFuQUc4YVlKVjhYeThxUUFBQUFRQUFDQUFhTUVad0ZzbVdCblB3MXNLQUFCQUFBQUFBZ0FBRUFDTXpYY0EzakRCN2JnL2J5Z0FBQUFCQUFBSUFGcHlCdkIyQ1ZiSWZYazdBUUFBQ0FBQVFBRFFtak9BTjB1d1NuN3haZ2dBQUVBQUFBQUNBQUFRQUVUNERzQmJKYmdwZXlzRUFBQWdBQUFBQVVBSlp3QnZsR0MxN0kwUUFBQ0FBQUFBQkFBbG5BRzhUWUlWczdkQkFBQUFBZ0FBRUFBQWdBQWd3M2NBM2lUQnJkbWJJQUFBQUFFQUFBZ0FTamdEZUlzRUsyZHZnUUFBQUFRQUFDQUFLT0VNNEEwU3JKNjlBUUlBQUJBQUFJQUFBQUFFQUJtK0F6RDdCRGRvczBjQUFBQUNBQUFRQUpSd0JqRHpCS3RvTTBjQUFBQUNBQUFRQUpSd0JqRHJCQ3RwczBZQUFBQUNBQUFRQUFDQUFDRERkd0Jtbk9BMmJjWUlBQUJBQUFBQUFvQVNWdFJtbTJCRmJiWUlBQUJBQUFBQUFnQUFFQUJrdUZXYmFZSmJ0WmtpQUFBQUFRQUFDQUJLV0ZtYlpZS1Z0VmtpQUFBQUFRQUFDQUJLV0YyYllZTFZ0UmtpQUFBQUFRQUFDQUFBUUFDUTRZWnRkZ2x1MkdhSEFBQUFCQUFBSUFBb1laVnRaZ2xXMldhR0FBQUFCQUFBSUFBb1lhVnRWZ2xXMm1hRkFBQUFCQUFBSUFBQUFBRkFodHUyR1NXNGJac1JBZ0FBRUFBQWdBQ2doQlczMlNSWWNac05BZ0FBRUFBQWdBQ2doRlczbVNSWWRac0pBZ0FBRUFBQWdBQUFBQVFBR1c3ZVpwSGc1bTBXQ0FBQVFBQUFBQUtBRWxiZlpwQmc5VzBHQ0FBQVFBQUFBQUtBRWl1dndLMy9jMVplZ1Z2L0l3QUFBQUVBQUFnQUFFQUFrTFRpTGR6OVAyL0ZXN2o3UHdJQUFCQUFBSUFBWUFBcnJjU3QvK3VzdEJLMy9rY0FBQUFDQUFBUUFBeGtoZFc0OVgrOUZWYmoxdjhJQUFCQUFBQUFBZ0FBRUFDTVlPWWJ1ZnYvT0dhK2tidi9Jd0FBQUFFQUFBZ0FCamJqcXR6NmZ6d3pyc3F0L3hFQUFJQUFBQUFFQUEzTXRESzMvaC9YVEN0ejYzOEVBQUFnQUFBQUFRQUFDQUJHTnNQdDNQMS9mRFBjenQzL0VRQUFnQUFBQUFRQURYVmVvVnYvOTlGNWhXNzlqd0FBQUFRQUFDQUFhS3pqS3QzNnY1K09xM1RyZndRQUFDQUFBQUFCQUFBSUFEcnFkRk4zLysrcjAwM2QvUjhCQUFCRTdJNkgvY01ZR05WbE8vbkxubjkzdjEzOVpZOE5BQUFnQUFBQUFRQUFDQUFBUUFBQUFBSUFBQkFBQUlBQUFBQUVBQUFnQUFBQUFRQUFDQUFBUUFBQUFBSUFBQkFBQUlBQUFBQUVBQUFJQUFCQUFBQUFBZ0FBRUFBQWdBQUFBQVFBQUNBQUFBQUJBQUFJQUFCQUFBQUFBZ0FBRUFBQWdBQUFBQVFBQUNBQUFBQUJBQUFJQUFBUUFBQ0FBQUFBQkFBQUlBQUFBQUVBQUFnQUFFQUFBQUFDQUFBUUFBQ0FBQUFBQkFBQUlBQUFBQUVBQUFnQUFFQUFBQUFDQUFBUUFBQWdBQUFBQVFBQUNBQUFRQUFBQUFJQUFCQUFBSUFBQUFBRUFBQWdBQUFBQVFBQUNBQUFRQUFBQUFJQUFCQUFBSUFBQUFBRUFBQWdBQUJBQUFBQUFnQUFFQUFBZ0FBQUFBUUFBQ0FBQUFBQkFBQUlBQUJBQUFBQUFnQUFFQUFBZ0FBQUFBUUFBQ0FBQUFBQkFBQUlBQUJBQUFDQUFBQUFCQUFBSUFBQUFBRUFBQWdBQUVBQUFBQUNBQUFRQUFDQUFBQUFCQUFBSUFBQUFBRUFBQWdBQUVBQUFBQUNBQUQ0eGU1NDJEK01nWjh1MjhrUXdqNjNyNlgrdi9mYjFhT0h2WjgvREFFYkFBQVFBQUNBQUFBQUJBQUFJQUFBQUFFQUFBZ0FBRUFBQUFBQ0FBQVFBQUNBQUFBQUJBQUFJQUFBQUFFQUFBZ0FBRUFBQUFBQ0FBQVFBQUNBQUFBQUFRQUFDQUFBWUU2NzQySC9NQVlBc0FFQUFBUUFBQ0FBQUFBQkFBQUlBQUJBQUFBQUFnQUFFQUFBZ0FBQUFBUUFBQ0FBQUFBQkFBQUlBQUJBQUFBQUFnQUFFQUFBSUFBQUFBRUFBQWdBQUVBQUFBQUNBQUFRQUFDQUFBQUFCQUFBSUFBQUFBRUFBQWdBQUVBQUFBQUNBQUFRQUFDQUFBQUFCQUFBSUFBQUFBRUFBQUlBQUJBQUFJQUFBQUFFQUFBZ0FBQUFBUUFBQ0FBQVFBQUFBQUlBQUJBQUFJQUFBQUFFQUFBZ0FBQUFBUUFBQ0FBQVFBQUFBQUlBQUFRQUFDQUFBQUFCQUFBSUFBQkFBQUFBQWdBQUVBQUFnQUFBQUFRQUFDQUFBQUFCQUFBSUFBQkFBQUFBQWdBQUVBQUFnQUFBQUFRQUFBZ0FBRUFBQUFBQ0FBQVFBQUNBQUFBQUJBQUFJQUFBQUFFQUFBZ0FBRUFBQUFBQ0FBQVFBQUNBQUFBQUJBQUFJQUFBQUFFQUFBZ0FBQkFBQUlBQUFBQUVBQUFnQUFBQUFRQUFDQUFBUUFBQUFBSUFBQkFBQUlBQUFBQUVBQUFnQUFBQUFRQUFDQUFBUUFBQUFBSUFBQkFBQUNBQUFBQUJBQUFJQUFCQUFBQUFBZ0FBRUFBQWdBQUFBQVFBQUNBQUFBQUJBQUFJQUFCQUFBQUFBZ0FBRUFBQWdBQUFBQVFBQUNBQUFBQUJBQUFDQUFCWXdqZHJJTStQZHlKUG5RQUFBQUJKUlU1RXJrSmdnZz09IiwgInNpemVzIjogIjUxMng1MTIiLCAidHlwZSI6ICJpbWFnZS9wbmciLCAicHVycG9zZSI6ICJtYXNrYWJsZSJ9XX0=">
+<title>Divide Aí</title>
+<style>
+:root{
+  --base:#14110F; --surf:#1F1A17; --surf2:#2A2320; --line:#3A302A;
+  --ink:#F4EFE8; --ink-dim:#A99C90; --ink-faint:#6E635B;
+  --amber:#E8912D; --amber-dark:#B96F1D;
+  --pago:#6FA86B; --alerta:#D8604A;
+  --r:14px;
+  box-sizing:border-box;
+  padding-top:env(safe-area-inset-top,0px);
+  padding-bottom:env(safe-area-inset-bottom,0px);
+}
+*,*::before,*::after{box-sizing:inherit}
+html{scroll-padding-top:env(safe-area-inset-top,0px);-webkit-text-size-adjust:100%}
+body{
+  margin:0;background:var(--base);color:var(--ink);
+  font-family:system-ui,-apple-system,"Segoe UI",Roboto,sans-serif;
+  font-size:16px;line-height:1.4;
+  -webkit-font-smoothing:antialiased;
+  padding-bottom:120px;
+}
+button{font:inherit;color:inherit;border:0;background:none;cursor:pointer}
+.num{font-variant-numeric:tabular-nums;letter-spacing:-.02em}
+
+/* cabeçalho */
+header{
+  position:sticky;top:env(safe-area-inset-top,0px);z-index:20;
+  background:var(--base);border-bottom:1px solid var(--line);
+  display:flex;align-items:center;gap:10px;padding:12px 14px;
+}
+header h1{margin:0;font-size:17px;font-weight:650;flex:1;letter-spacing:-.01em}
+header .sub{display:block;font-size:12px;font-weight:450;color:var(--ink-dim);letter-spacing:0}
+.voltar{width:38px;height:38px;border-radius:10px;background:var(--surf);
+  display:grid;place-items:center;font-size:20px;flex:none}
+.hbtn{padding:8px 12px;border-radius:10px;background:var(--surf);font-size:14px;font-weight:550;flex:none}
+
+main{padding:14px}
+.vazio{text-align:center;padding:48px 24px;color:var(--ink-dim)}
+.vazio strong{display:block;color:var(--ink);font-size:17px;margin-bottom:6px;font-weight:600}
+
+/* mesas */
+.mesas{display:grid;grid-template-columns:repeat(auto-fill,minmax(128px,1fr));gap:10px}
+.mesa{background:var(--surf);border:1px solid var(--line);border-radius:var(--r);
+  padding:14px;text-align:left;min-height:104px;display:flex;flex-direction:column;justify-content:space-between}
+.mesa .n{font-size:26px;font-weight:700;letter-spacing:-.03em}
+.mesa .v{font-size:18px;font-weight:650;color:var(--amber)}
+.mesa .l{font-size:11px;color:var(--ink-faint);margin-top:2px}
+.mesa.quitada{border-color:var(--pago)}
+.mesa.quitada .v{color:var(--pago)}
+.mesa.nova{border-style:dashed;border-color:var(--amber-dark);color:var(--amber);
+  align-items:center;justify-content:center;text-align:center;font-weight:600;font-size:15px}
+
+/* linhas de item */
+.item{display:flex;align-items:stretch;gap:0;background:var(--surf);
+  border:1px solid var(--line);border-radius:var(--r);margin-bottom:8px;overflow:hidden}
+.item.sel{border-color:var(--amber);background:#241C14}
+.item.zerado{opacity:.4}
+.check{width:56px;flex:none;display:grid;place-items:center;border-right:1px solid var(--line)}
+.box{width:26px;height:26px;border-radius:7px;border:2px solid var(--ink-faint);display:grid;place-items:center}
+.item.sel .box{background:var(--amber);border-color:var(--amber)}
+.item.sel .box::after{content:"";width:11px;height:6px;border-left:2.5px solid #14110F;
+  border-bottom:2.5px solid #14110F;transform:rotate(-45deg) translate(1px,-2px)}
+.corpo{flex:1;padding:11px 12px;min-width:0}
+.corpo .nome{font-weight:600;font-size:15px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.corpo .meta{font-size:12.5px;color:var(--ink-dim);margin-top:2px}
+.valor{padding:11px 12px;display:flex;flex-direction:column;justify-content:center;
+  align-items:flex-end;text-align:right;flex:none}
+.valor .v{font-weight:650;font-size:15px}
+.valor .frac{font-size:11px;color:var(--amber);margin-top:2px;font-weight:600}
+.dividir{padding:0 14px;background:var(--surf2);border-left:1px solid var(--line);
+  font-size:11px;font-weight:650;color:var(--amber);flex:none;letter-spacing:.01em}
+
+/* barra inferior */
+.barra{position:fixed;left:0;right:0;bottom:0;z-index:30;background:var(--surf);
+  border-top:1px solid var(--line);padding:12px 14px;
+  padding-bottom:calc(12px + env(safe-area-inset-bottom,0px))}
+.linha-resumo{display:flex;justify-content:space-between;font-size:13px;color:var(--ink-dim);margin-bottom:3px}
+.linha-resumo b{color:var(--ink);font-weight:600}
+.total-linha{display:flex;justify-content:space-between;align-items:baseline;margin:6px 0 10px}
+.total-linha span{font-size:13px;color:var(--ink-dim)}
+.total-linha b{font-size:27px;font-weight:700;letter-spacing:-.03em}
+.acao{width:100%;padding:16px;border-radius:12px;background:var(--amber);color:#14110F;
+  font-size:17px;font-weight:700;letter-spacing:-.01em}
+.acao:disabled{background:var(--surf2);color:var(--ink-faint)}
+.acao.sec{background:var(--surf2);color:var(--ink);font-weight:600;font-size:15px;padding:13px}
+
+/* modal */
+.fundo{position:fixed;inset:0;background:rgba(0,0,0,.72);z-index:40;display:flex;
+  align-items:flex-end;justify-content:center}
+.modal{background:var(--surf);width:100%;max-width:520px;border-radius:20px 20px 0 0;
+  padding:20px 18px;padding-bottom:calc(20px + env(safe-area-inset-bottom,0px));
+  max-height:88vh;overflow-y:auto;animation:sobe .18s ease-out}
+@keyframes sobe{from{transform:translateY(14px)}to{transform:none}}
+@media (prefers-reduced-motion:reduce){.modal{animation:none}}
+.modal h2{margin:0 0 4px;font-size:19px;font-weight:650;letter-spacing:-.01em}
+.modal p.dica{margin:0 0 16px;color:var(--ink-dim);font-size:13.5px}
+.campo{width:100%;padding:14px;border-radius:11px;background:var(--surf2);
+  border:1px solid var(--line);color:var(--ink);font-size:17px;margin-bottom:10px;font-weight:550}
+.campo:focus{outline:2px solid var(--amber);outline-offset:1px}
+label.rot{display:block;font-size:13px;color:var(--ink-dim);margin-bottom:5px;font-weight:550}
+
+/* divisor */
+.stepper{display:flex;align-items:center;gap:14px;justify-content:center;margin:14px 0}
+.stepper button{width:56px;height:56px;border-radius:14px;background:var(--surf2);
+  font-size:26px;font-weight:600;display:grid;place-items:center}
+.stepper .n{font-size:40px;font-weight:700;min-width:64px;text-align:center}
+.previa{background:var(--surf2);border-radius:12px;padding:14px;margin:14px 0;text-align:center}
+.previa .p{font-size:13px;color:var(--ink-dim)}
+.previa .g{font-size:30px;font-weight:700;color:var(--amber);margin:2px 0;letter-spacing:-.02em}
+.partes{display:flex;flex-wrap:wrap;gap:7px;justify-content:center;margin-top:10px}
+.parte{padding:9px 15px;border-radius:9px;background:var(--surf);border:1px solid var(--line);
+  font-size:14px;font-weight:600}
+.parte.on{background:var(--amber);border-color:var(--amber);color:#14110F}
+
+/* cobrança */
+.cobrar{text-align:center;padding:10px 0 16px}
+.cobrar .rot{font-size:13px;color:var(--ink-dim)}
+.cobrar .big{font-size:52px;font-weight:700;letter-spacing:-.04em;margin:4px 0 2px;line-height:1}
+.meios{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin:14px 0}
+.meio{padding:14px;border-radius:11px;background:var(--surf2);border:1px solid var(--line);
+  font-weight:600;font-size:14.5px}
+.meio.on{background:var(--amber);border-color:var(--amber);color:#14110F}
+
+/* cardápio e histórico */
+.cardapio-item{display:flex;align-items:center;gap:10px;padding:13px;background:var(--surf);
+  border:1px solid var(--line);border-radius:12px;margin-bottom:7px;width:100%;text-align:left}
+.cardapio-item .n{flex:1;font-weight:600;font-size:15px}
+.cardapio-item .p{color:var(--amber);font-weight:650}
+.rodada{background:var(--surf);border:1px solid var(--line);border-left:3px solid var(--pago);
+  border-radius:12px;padding:13px;margin-bottom:8px}
+.rodada .top{display:flex;justify-content:space-between;font-weight:650;margin-bottom:5px}
+.rodada .det{font-size:12.5px;color:var(--ink-dim);line-height:1.6}
+.rodada .estorno{color:var(--alerta);font-size:12.5px;font-weight:600;margin-top:8px}
+.acoes-cardapio{display:grid;grid-template-columns:1fr 1fr;gap:9px;margin-bottom:18px}
+.acao-card{background:var(--surf);border:1px solid var(--amber-dark);border-radius:14px;
+  padding:16px 13px;text-align:left}
+.acao-card b{display:block;font-size:15px;font-weight:650;color:var(--amber);margin-bottom:3px}
+.acao-card span{font-size:12.5px;color:var(--ink-dim);line-height:1.4;display:block}
+.titulo-lista{font-size:12.5px;color:var(--ink-faint);font-weight:600;margin-bottom:9px}
+.atalho{display:flex;width:100%;align-items:center;justify-content:space-between;gap:10px;
+  background:var(--surf);border:1px solid var(--line);border-radius:13px;padding:14px 16px;
+  margin-top:14px;text-align:left}
+.atalho b{display:block;font-size:15.5px;font-weight:650}
+.atalho em{font-style:normal;display:block;font-size:12.5px;color:var(--ink-dim);margin-top:2px}
+.atalho i{font-style:normal;font-size:22px;color:var(--ink-faint)}
+.cardapio-item.avulso{border-style:dashed;border-color:var(--amber-dark);color:var(--amber)}
+.barrinha{height:8px;background:var(--surf2);border-radius:5px;overflow:hidden;margin-top:12px}
+.barrinha i{display:block;height:100%;background:var(--amber);transition:width .3s}
+.lidos{max-height:46vh;overflow-y:auto;margin-bottom:14px}
+.lido{display:flex;align-items:center;gap:8px;margin-bottom:7px}
+.lido.off{opacity:.38}
+.lido .bx{width:26px;height:26px;flex:none;border-radius:7px;border:2px solid var(--ink-faint);
+  background:var(--amber);border-color:var(--amber);position:relative}
+.lido.off .bx{background:transparent;border-color:var(--ink-faint)}
+.lido .bx::after{content:"";position:absolute;left:5px;top:6px;width:11px;height:6px;
+  border-left:2.5px solid #14110F;border-bottom:2.5px solid #14110F;transform:rotate(-45deg)}
+.lido.off .bx::after{display:none}
+.lido .campo{margin:0;padding:11px;font-size:15px}
+.lido .nome{flex:1;min-width:0}
+.lido .preco{width:90px;flex:none;text-align:right}
+.cartao-e{background:var(--surf2);border-radius:12px;padding:13px 15px;margin-bottom:8px}
+.cartao-e b{display:block;font-size:15.5px;font-weight:650;margin-bottom:2px}
+.cartao-e span{color:var(--ink-dim);font-size:14.5px;line-height:1.45}
+.cartao-e.alerta{border-left:3px solid var(--alerta)}
+.cartao-e.alerta b{color:var(--alerta)}
+.faixa{display:block;width:100%;text-align:left;background:#2E2317;border:1px solid var(--amber-dark);
+  color:var(--amber);border-radius:12px;padding:12px 14px;font-size:13.5px;margin-bottom:12px;
+  font-weight:550}
+.faixa b{font-weight:700}
+.faixa.venc{background:#2A1614;border-color:var(--alerta);color:#F0BDB4}
+.faixa.venc b{color:var(--alerta)}
+.ajuda{display:block;width:100%;text-align:center;color:var(--ink-dim);padding:18px;
+  font-size:14px;font-weight:600;margin-top:6px}
+.toast{position:fixed;left:50%;transform:translateX(-50%);bottom:calc(140px + env(safe-area-inset-bottom,0px));
+  background:var(--ink);color:var(--base);padding:11px 18px;border-radius:24px;font-weight:650;
+  font-size:14px;z-index:60;box-shadow:0 6px 24px rgba(0,0,0,.45)}
+.comandas{display:flex;gap:7px;overflow-x:auto;padding-bottom:10px;margin-bottom:4px;
+  scrollbar-width:none}
+.comandas::-webkit-scrollbar{display:none}
+.comanda{flex:none;padding:9px 13px;border-radius:11px;background:var(--surf);
+  border:1px solid var(--line);font-size:13.5px;font-weight:600;display:flex;
+  flex-direction:column;align-items:flex-start;gap:1px;min-width:86px}
+.comanda em{font-style:normal;font-size:12px;color:var(--amber);font-weight:650}
+.comanda.on{background:var(--amber);border-color:var(--amber);color:#14110F}
+.comanda.on em{color:#14110F;opacity:.75}
+.comanda.add{color:var(--amber);border-style:dashed;border-color:var(--amber-dark);
+  justify-content:center;align-items:center;min-width:auto}
+.dono{display:inline-block;margin-left:7px;padding:2px 7px;border-radius:6px;
+  background:var(--surf2);color:var(--ink-dim);font-size:11px;font-weight:600;
+  vertical-align:middle}
+.dono.mesa{color:var(--amber);background:#2E2317}
+.destinos{display:flex;flex-wrap:wrap;gap:7px;margin-bottom:6px}
+.tabs{display:flex;gap:6px;margin-bottom:12px}
+.tab{flex:1;padding:11px;border-radius:10px;background:var(--surf);font-weight:600;font-size:14px;
+  border:1px solid var(--line)}
+.tab.on{background:var(--amber);color:#14110F;border-color:var(--amber)}
+</style>
+</head>
+<body>
+<header>
+  <button class="voltar" id="btnVoltar" hidden>‹</button>
+  <h1 id="titulo">Divide Aí<span class="sub" id="subtitulo">Contas de mesa sem calculadora</span></h1>
+  <button class="hbtn" id="btnHeader" hidden></button>
+</header>
+<main id="tela"></main>
+<div id="barra"></div>
+<div id="modal"></div>
+
+<script>
+/* ==========================================================================
+   NÚCLEO DE CÁLCULO
+   Regras: dinheiro só em centavos inteiros; quantidade consumida em fração
+   exata; arredondamento do ACUMULADO, nunca da parcela isolada.
+   ========================================================================== */
+const mdc=(a,b)=>b===0?Math.abs(a):mdc(b,a%b);
+function fr(n,d=1){if(d===0)throw Error('den 0');if(d<0){n=-n;d=-d}
+  const g=mdc(Math.abs(n),d)||1;return{n:n/g,d:d/g}}
+const frSoma=(a,b)=>fr(a.n*b.d+b.n*a.d,a.d*b.d);
+const frSub=(a,b)=>fr(a.n*b.d-b.n*a.d,a.d*b.d);
+const frMult=(a,b)=>fr(a.n*b.n,a.d*b.d);
+const frZero=a=>a.n===0, frNeg=a=>a.n<0, frMaior=(a,b)=>a.n*b.d>b.n*a.d;
+const frTxt=a=>a.d===1?`${a.n}`:`${a.n}/${a.d}`;
+const brl=c=>(c/100).toLocaleString('pt-BR',{style:'currency',currency:'BRL'});
+
+const totalMesa=m=>m.itens.reduce((s,i)=>s+i.quantidade*i.precoUnitario,0);
+const jaCobrado=m=>m.rodadas.reduce((s,r)=>s+r.subtotal,0);
+const saldoMesa=m=>totalMesa(m)-jaCobrado(m);
+const mesaQuitada=m=>m.itens.length>0&&m.itens.every(i=>frZero(i.saldo));
+
+function calcularRodada(mesa,selecoes,{cobrarServico=true}={}){
+  const linhas=[];let eN=0,eD=1;
+  for(const sel of selecoes){
+    const item=mesa.itens.find(i=>i.id===sel.itemId);
+    if(!item)throw Error('Item não existe');
+    const u=sel.unidades;
+    if(frNeg(u)||frZero(u))throw Error(`Quantidade inválida em ${item.nome}`);
+    if(frMaior(u,item.saldo))
+      throw Error(`${item.nome} tem só ${frTxt(item.saldo)} em aberto`);
+    const ve=frMult(u,fr(item.precoUnitario));
+    eN=eN*ve.d+ve.n*eD; eD=eD*ve.d;
+    linhas.push({itemId:item.id,nome:item.nome,unidades:u,
+      rotulo:u.d===1?`${u.n}x ${item.nome}`:`${item.nome} (${u.n}/${u.d})`,
+      valorExato:ve,valor:Math.round(ve.n/ve.d)});
+  }
+  const exato=fr(eN,eD);
+  // arredonda o acumulado e desconta o que já saiu: o erro nunca soma
+  const acum=frSoma(mesa.exatoCobrado,exato);
+  const subtotal=Math.round(acum.n/acum.d)-jaCobrado(mesa);
+  ajustarSobra(linhas,subtotal);
+  const servico=cobrarServico?Math.round(subtotal*mesa.taxaServicoPct/100):0;
+  const ehUltima=mesa.itens.every(item=>{
+    const ped=selecoes.filter(s=>s.itemId===item.id)
+      .reduce((a,s)=>frSoma(a,s.unidades),fr(0));
+    return frZero(frSub(item.saldo,ped));
+  });
+  return{linhas,subtotal,servico,total:subtotal+servico,ehUltima,exato};
+}
+function ajustarSobra(linhas,subtotal){
+  const soma=linhas.reduce((s,l)=>s+l.valor,0);let diff=subtotal-soma;
+  if(diff===0||!linhas.length)return;
+  const passo=diff>0?1:-1;
+  const ord=[...linhas].sort((a,b)=>
+    (b.valorExato.n/b.valorExato.d)%1-(a.valorExato.n/a.valorExato.d)%1);
+  let i=0;while(diff!==0){ord[i%ord.length].valor+=passo;diff-=passo;i++}
+}
+function confirmarRodada(mesa,rodada,pagamento){
+  for(const l of rodada.linhas){
+    const it=mesa.itens.find(i=>i.id===l.itemId);
+    it.saldo=frSub(it.saldo,l.unidades);
+    if(frNeg(it.saldo))throw Error('Saldo negativo');
+  }
+  mesa.exatoCobrado=frSoma(mesa.exatoCobrado,rodada.exato);
+  mesa.rodadas.push({id:'r'+(mesa.rodadas.length+1),em:Date.now(),...rodada,pagamento});
+  if(mesaQuitada(mesa))mesa.status='fechada';
+}
+function estornarRodada(mesa,rid){
+  const i=mesa.rodadas.findIndex(r=>r.id===rid);if(i<0)return;
+  const r=mesa.rodadas[i];
+  for(const l of r.linhas){
+    const it=mesa.itens.find(x=>x.id===l.itemId);
+    it.saldo=frSoma(it.saldo,l.unidades);
+  }
+  mesa.exatoCobrado=frSub(mesa.exatoCobrado,r.exato);
+  mesa.rodadas.splice(i,1);mesa.status='aberta';
+}
+
+/* ==========================================================================
+   LICENÇA
+   O código do aparelho é gerado uma vez e fica salvo. A chave de ativação é
+   derivada dele: só vale naquele aparelho. Validação é feita aqui mesmo,
+   sem servidor e sem internet.
+   ========================================================================== */
+const SEGREDO='DvA!2026#comanda@br';
+function codigoAparelho(){
+  let c=null;try{c=localStorage.getItem('divideai_ap')}catch(e){}
+  if(!c){
+    c='';const alf='ABCDEFGHJKLMNPQRSTUVWXYZ23456789';
+    for(let i=0;i<6;i++)c+=alf[Math.floor(Math.random()*alf.length)];
+    try{localStorage.setItem('divideai_ap',c)}catch(e){}
+  }
+  return c;
+}
+/**
+ * A chave depende do aparelho E do período de validade.
+ * periodo 'V'      = vitalícia, nunca expira
+ * periodo '2026-11' = vale até o último dia de novembro de 2026
+ */
+function chaveDe(cod,periodo='V'){
+  const bloco=salt=>{
+    let h=2166136261>>>0;const t=salt+String(cod).toUpperCase()+'|'+periodo+'|'+SEGREDO;
+    for(let i=0;i<t.length;i++){h^=t.charCodeAt(i);h=Math.imul(h,16777619)>>>0}
+    return (h%1679616).toString(36).toUpperCase().padStart(4,'0');
+  };
+  return [bloco('A'),bloco('B'),bloco('C')].join('-');
+}
+const AP=codigoAparelho();
+const limpaChave=k=>String(k).toUpperCase().replace(/[^A-Z0-9]/g,'');
+const limpaEstab=e=>String(e).toUpperCase().replace(/[^A-Z0-9]/g,'');
+
+/** Descobre a que período uma chave pertence, testando os próximos 24 meses. */
+function periodoDaChave(chave,estab){
+  const k=limpaChave(chave), e=limpaEstab(estab);
+  if(k===limpaChave(chaveDe(e,'V')))return 'V';
+  const h=new Date();
+  for(let i=-1;i<24;i++){
+    const d=new Date(h.getFullYear(),h.getMonth()+i,1);
+    const p=`${d.getFullYear()}-${String(d.getMonth()+1).padStart(2,'0')}`;
+    if(k===limpaChave(chaveDe(e,p)))return p;
+  }
+  return null;
+}
+const fimDoPeriodo=p=>{
+  if(p==='V')return null;
+  const [a,m]=p.split('-').map(Number);
+  return new Date(a,m,0,23,59,59);           // último dia do mês
+};
+function licenca(){
+  try{
+    const k=localStorage.getItem('divideai_lic');
+    const p=localStorage.getItem('divideai_per');
+    const e=localStorage.getItem('divideai_estab')||'';
+    if(!k||!p)return null;
+    if(limpaChave(k)!==limpaChave(chaveDe(limpaEstab(e),p)))return null;
+    const fim=fimDoPeriodo(p);
+    return {periodo:p,estab:e,fim,vencida:!!fim&&Date.now()>fim.getTime()};
+  }catch(e){return null}
+}
+const ativado=()=>{const l=licenca();return !!l&&!l.vencida};
+const diasRestantes=()=>{
+  const l=licenca();if(!l||!l.fim)return null;
+  return Math.ceil((l.fim.getTime()-Date.now())/86400000);
+};
+function ativar(estab,chave){
+  const e=limpaEstab(estab);
+  if(e.length<4)return 'estab';
+  const p=periodoDaChave(chave,e);
+  if(!p)return false;
+  const fim=fimDoPeriodo(p);
+  if(fim&&Date.now()>fim.getTime())return 'vencida';
+  try{
+    localStorage.setItem('divideai_lic',chaveDe(e,p));
+    localStorage.setItem('divideai_per',p);
+    localStorage.setItem('divideai_estab',e);
+  }catch(e2){}
+  return true;
+}
+
+/* ==========================================================================
+   ESTADO
+   ========================================================================== */
+const CARDAPIO_INICIAL=[
+  {id:'c1',nome:'Chopp 300ml',preco:1200,comp:true},
+  {id:'c2',nome:'Cerveja 600ml',preco:3500,comp:true},
+  {id:'c3',nome:'Refrigerante',preco:800,comp:false},
+  {id:'c4',nome:'Suco natural',preco:1200,comp:false},
+  {id:'c5',nome:'Água',preco:600,comp:false},
+  {id:'c6',nome:'Caipirinha',preco:2200,comp:false},
+  {id:'c7',nome:'Porção de fritas',preco:4200,comp:true},
+  {id:'c8',nome:'Porção de calabresa',preco:4800,comp:true},
+  {id:'c9',nome:'Isca de frango',preco:5500,comp:true},
+  {id:'c10',nome:'Picanha na chapa',preco:8990,comp:true},
+  {id:'c11',nome:'Prato executivo',preco:3800,comp:false},
+  {id:'c12',nome:'Sobremesa',preco:1800,comp:false},
+];
+let S={mesas:[],cardapio:CARDAPIO_INICIAL,seq:1};
+let vista={tela:'mesas',mesaId:null,sel:{},servico:true,aba:'conta'};
+
+function salvar(){try{localStorage.setItem('divideai',JSON.stringify(S))}catch(e){}}
+function carregar(){
+  try{
+    const b=localStorage.getItem('divideai');
+    if(b){const d=JSON.parse(b);if(d&&d.mesas)S=d}
+  }catch(e){}
+}
+const mesaAtual=()=>{
+  const m=S.mesas.find(m=>m.id===vista.mesaId);
+  if(m&&!m.pessoas)m.pessoas=[];   // mesas criadas antes das comandas
+  return m;
+};
+
+function novaMesa(numero){
+  const m={id:'m'+(S.seq++),numero,abertaEm:Date.now(),itens:[],pessoas:[],
+    taxaServicoPct:10,rodadas:[],status:'aberta',exatoCobrado:fr(0)};
+  S.mesas.push(m);salvar();return m;
+}
+function lancarItem(mesa,prod,qtd,donoId){
+  // junta com lançamento igual SÓ se for da mesma comanda
+  const ex=mesa.itens.find(i=>i.produtoId===prod.id&&i.donoId===donoId&&i.saldo.d===1);
+  if(ex){ex.quantidade+=qtd;ex.saldo=frSoma(ex.saldo,fr(qtd))}
+  else mesa.itens.push({id:'i'+Date.now()+Math.random().toString(36).slice(2,5),
+    produtoId:prod.id,nome:prod.nome,quantidade:qtd,precoUnitario:prod.preco,
+    compartilhavel:prod.comp,saldo:fr(qtd),donoId:donoId||null,em:Date.now()});
+  salvar();
+}
+function novaPessoa(mesa,nome){
+  const p={id:'p'+Date.now()+Math.random().toString(36).slice(2,4),
+    nome:nome||('Comanda '+(mesa.pessoas.length+1))};
+  mesa.pessoas.push(p);salvar();return p;
+}
+const nomeDono=(mesa,id)=>id?(mesa.pessoas.find(p=>p.id===id)?.nome||'?'):'Mesa';
+const itensDe=(mesa,filtro)=>filtro==='todos'?mesa.itens
+  :mesa.itens.filter(i=>(i.donoId||'mesa')===filtro);
+const saldoDe=(mesa,filtro)=>itensDe(mesa,filtro).reduce((s,i)=>{
+  const v=frMult(i.saldo,fr(i.precoUnitario));return s+Math.round(v.n/v.d)},0);
+
+/* ==========================================================================
+   INTERFACE
+   ========================================================================== */
+const $=id=>document.getElementById(id);
+const esc=s=>String(s).replace(/[&<>"]/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]));
+function toast(t){
+  const d=document.createElement('div');d.className='toast';d.textContent=t;
+  document.body.appendChild(d);setTimeout(()=>d.remove(),2000);
+}
+
+function render(){
+  const m=mesaAtual();
+  $('btnVoltar').hidden=vista.tela==='mesas';
+  $('btnHeader').hidden=true;
+  if(vista.tela==='mesas'){
+    $('titulo').innerHTML='Divide Aí<span class="sub">Contas de mesa sem calculadora</span>';
+    $('btnHeader').hidden=false;$('btnHeader').textContent='Cardápio';
+    $('btnHeader').onclick=()=>{vista.tela='cardapio';render()};
+    telaMesas();
+    const lic=licenca(), dias=diasRestantes();
+    if(!ativado()){
+      $('tela').insertAdjacentHTML('afterbegin',
+        lic&&lic.vencida
+          ? `<button class="faixa venc" onclick="telaAtivar()">
+              <b>Acesso vencido</b> · suas mesas estão salvas. Renovar →</button>`
+          : `<button class="faixa" onclick="telaAtivar()">
+              <b>Modo demonstração</b> · uma mesa por vez. Ativar por ${PRECO} →</button>`);
+    } else if(dias!==null&&dias<=7){
+      $('tela').insertAdjacentHTML('afterbegin',
+        `<button class="faixa" onclick="telaAtivar()">
+          <b>${dias<=1?'Vence hoje':'Vence em '+dias+' dias'}</b> · renovar →</button>`);
+    }
+    $('tela').insertAdjacentHTML('beforeend',
+      `<button class="atalho" onclick="vista.tela='cardapio';render()">
+         <span><b>Cardápio</b><em>${S.cardapio.length} ${
+           S.cardapio.length===1?'item':'itens'} · cadastrar por foto ou na mão</em></span>
+         <i>›</i></button>
+       <button class="ajuda" onclick="telaAjuda()">Como usar o app</button>`);
+  } else if(vista.tela==='cardapio'){
+    $('titulo').innerHTML='Cardápio<span class="sub">Itens e preços</span>';
+    telaCardapio();
+  } else if(m){
+    const s=saldoMesa(m);
+    $('titulo').innerHTML=`Mesa ${esc(m.numero)}<span class="sub">${
+      s>0?`faltam ${brl(s)}`:'conta quitada'}</span>`;
+    $('btnHeader').hidden=false;$('btnHeader').textContent='Cardápio';
+    $('btnHeader').onclick=()=>{vista.tela='cardapio';render()};
+    telaMesa(m);
+  }
+}
+$('btnVoltar').onclick=()=>{
+  if(vista.tela==='cardapio'){
+    vista.tela=vista.mesaId?'mesa':'mesas';render();return;
+  }
+  if(vista.tela==='mesa'&&Object.keys(vista.sel).length){vista.sel={};render();return}
+  vista.tela='mesas';vista.mesaId=null;vista.sel={};render();
+};
+
+/* --- mesas --- */
+function telaMesas(){
+  const abertas=S.mesas.filter(m=>m.status==='aberta');
+  $('tela').innerHTML=`<div class="mesas">
+    <button class="mesa nova" onclick="abrirMesa()">+ Abrir mesa</button>
+    ${abertas.map(m=>{
+      const s=saldoMesa(m),t=totalMesa(m);
+      return `<button class="mesa${s===0&&t>0?' quitada':''}" onclick="verMesa('${m.id}')">
+        <div><div class="n">${esc(m.numero)}</div>
+        <div class="l">${m.itens.length} ${m.itens.length===1?'item':'itens'}${
+          m.pessoas?.length?` · ${m.pessoas.length} comanda${m.pessoas.length>1?'s':''}`:''}${
+          m.rodadas.length?` · ${m.rodadas.length} pago${m.rodadas.length>1?'s':''}`:''}</div></div>
+        <div class="v num">${brl(s)}</div></button>`}).join('')}
+  </div>
+  ${abertas.length?'':`<div class="vazio"><strong>Nenhuma mesa aberta</strong>
+    Toque em abrir mesa para começar.<br><br>
+    <button class="acao sec" style="max-width:260px;margin:0 auto"
+      onclick="mesaExemplo()">Ver uma mesa de exemplo</button></div>`}`;
+  $('barra').innerHTML='';
+}
+window.mesaExemplo=()=>{
+  const m=novaMesa('7');
+  const p1=novaPessoa(m,'Camisa azul'), p2=novaPessoa(m,'Aniversariante'), p3=novaPessoa(m,'Casal');
+  const ach=n=>S.cardapio.find(c=>c.nome===n);
+  lancarItem(m,ach('Cerveja 600ml'),2,null);
+  lancarItem(m,ach('Porção de fritas'),1,null);
+  lancarItem(m,ach('Picanha na chapa'),1,p1.id);
+  lancarItem(m,ach('Refrigerante'),1,p1.id);
+  lancarItem(m,ach('Caipirinha'),2,p2.id);
+  lancarItem(m,ach('Prato executivo'),1,p2.id);
+  lancarItem(m,ach('Isca de frango'),1,p3.id);
+  lancarItem(m,ach('Água'),2,p3.id);
+  salvar();verMesa(m.id);
+  toast('Mesa de exemplo criada');
+};
+window.abrirMesa=()=>{
+  if(!ativado()&&S.mesas.filter(m=>m.status!=='encerrada').length>=1){
+    modal(`<h2>Modo demonstração</h2>
+      <p class="dica">Na demonstração você trabalha com uma mesa por vez, com todos os
+      recursos. Para abrir várias mesas de verdade, ative o app.</p>
+      <button class="acao" onclick="telaAtivar()">Ativar por ${PRECO}</button>
+      <button class="acao sec" style="margin-top:8px" onclick="fecharModal()">Agora não</button>`);
+    return;
+  }
+  modal(`<h2>Abrir mesa</h2><p class="dica">Número ou nome da mesa.</p>
+    <input class="campo" id="numMesa" placeholder="12" autocomplete="off">
+    <button class="acao" onclick="confirmarMesa()">Abrir</button>`);
+  setTimeout(()=>$('numMesa')?.focus(),80);
+};
+window.confirmarMesa=()=>{
+  const v=$('numMesa').value.trim();if(!v)return;
+  const m=novaMesa(v);fecharModal();vista.tela='mesa';vista.mesaId=m.id;vista.sel={};render();
+};
+window.verMesa=id=>{vista.tela='mesa';vista.mesaId=id;vista.sel={};
+  vista.aba='conta';vista.filtro='todos';destTmp=null;render()};
+
+/* --- mesa --- */
+function telaMesa(m){
+  const temSel=Object.keys(vista.sel).length>0;
+  if(vista.aba==='historico'){
+    $('tela').innerHTML=abas()+(m.rodadas.length?m.rodadas.map(r=>`
+      <div class="rodada"><div class="top"><span>${r.pagamento.meio}</span>
+        <span class="num">${brl(r.total)}</span></div>
+      <div class="det">${r.linhas.map(l=>esc(l.rotulo)+' — '+brl(l.valor)).join('<br>')}
+        ${r.servico?'<br>serviço '+brl(r.servico):''}</div>
+      <button class="estorno" onclick="fazerEstorno('${r.id}')">Estornar esta conta</button>
+      </div>`).join(''):`<div class="vazio"><strong>Ninguém pagou ainda</strong>
+        As contas fechadas aparecem aqui.</div>`);
+    $('barra').innerHTML='';return;
+  }
+  const lista=itensDe(m,vista.filtro||'todos');
+  $('tela').innerHTML=abas()+comandas(m)+(lista.length?lista.map(it=>{
+    const sel=vista.sel[it.id],zerado=frZero(it.saldo);
+    const restante=frMult(it.saldo,fr(it.precoUnitario));
+    return `<div class="item${sel?' sel':''}${zerado?' zerado':''}">
+      <button class="check" onclick="alternar('${it.id}')" ${zerado?'disabled':''}>
+        <span class="box"></span></button>
+      <button class="corpo" onclick="alternar('${it.id}')" ${zerado?'disabled':''}>
+        <div class="nome">${esc(it.nome)}${
+          (vista.filtro||'todos')==='todos'
+            ? `<span class="dono${it.donoId?'':' mesa'}">${esc(nomeDono(m,it.donoId))}</span>`:''}</div>
+        <div class="meta">${zerado?'tudo pago':
+          `${frTxt(it.saldo)} em aberto · ${brl(it.precoUnitario)} cada`}</div>
+      </button>
+      <div class="valor"><div class="v num">${brl(Math.round(restante.n/restante.d))}</div>
+        ${sel&&sel.d!==1?`<div class="frac">levando ${frTxt(sel)}</div>`:''}</div>
+      ${zerado?'':`<button class="dividir" onclick="abrirDivisao('${it.id}')">dividir</button>`}
+    </div>`}).join(''):`<div class="vazio"><strong>${
+    (vista.filtro||'todos')==='todos'?'Mesa vazia':'Comanda sem itens'}</strong>
+      Lance o primeiro item do cardápio.</div>`);
+
+  if(temSel){
+    const r=calcularRodada(m,selecoesArray(),{cobrarServico:vista.servico});
+    $('barra').innerHTML=`
+      <div class="linha-resumo"><span>Consumo do cliente</span><b class="num">${brl(r.subtotal)}</b></div>
+      <div class="linha-resumo"><span>
+        <label style="display:flex;gap:7px;align-items:center;cursor:pointer">
+        <input type="checkbox" ${vista.servico?'checked':''} onchange="vista.servico=this.checked;render()"
+        style="width:17px;height:17px;accent-color:var(--amber)"> Serviço ${m.taxaServicoPct}%</label></span>
+        <b class="num">${brl(r.servico)}</b></div>
+      <div class="total-linha"><span>Total a cobrar</span><b class="num">${brl(r.total)}</b></div>
+      <button class="acao" onclick="meioSel='credito';irCobrar()">Cobrar ${brl(r.total)}</button>`;
+  } else {
+    const f=vista.filtro||'todos';
+    const s=f==='todos'?saldoMesa(m):saldoDe(m,f);
+    const rot=f==='todos'?(m.rodadas.length?'Falta na mesa':'Total da mesa')
+      :`Comanda de ${f==='mesa'?'compartilhados':nomeDono(m,f)}`;
+    $('barra').innerHTML=`
+      <div class="total-linha"><span>${esc(rot)}</span>
+        <b class="num" style="${s===0?'color:var(--pago)':''}">${brl(s)}</b></div>
+      <button class="acao" onclick="abrirLancar()">Lançar item${
+        f!=='todos'&&f!=='mesa'?' para '+esc(nomeDono(m,f)):''}</button>
+      ${f!=='todos'&&s>0?`<button class="acao sec" style="margin-top:8px"
+        onclick="selecionarComanda('${f}')">Fechar esta comanda</button>`:''}
+      ${f==='todos'&&s===0&&m.itens.length?`<button class="acao sec" style="margin-top:8px"
+        onclick="encerrar()">Encerrar mesa</button>`:''}`;
+  }
+}
+function comandas(m){
+  const f=vista.filtro||'todos';
+  const chip=(id,txt,saldo)=>`<button class="comanda${f===id?' on':''}"
+    onclick="vista.filtro='${id}';vista.sel={};render()">
+    <span>${esc(txt)}</span>${saldo!=null?`<em class="num">${brl(saldo)}</em>`:''}</button>`;
+  const temComp=m.itens.some(i=>!i.donoId);
+  return `<div class="comandas">
+    ${chip('todos','Tudo',saldoMesa(m))}
+    ${temComp?chip('mesa','Compartilhado',saldoDe(m,'mesa')):''}
+    ${m.pessoas.map(p=>chip(p.id,p.nome,saldoDe(m,p.id))).join('')}
+    <button class="comanda add" onclick="abrirNovaComanda()">+ comanda</button>
+  </div>`;
+}
+window.abrirNovaComanda=()=>{
+  const m=mesaAtual();
+  modal(`<h2>Nova comanda</h2>
+    <p class="dica">Nome ou número. Serve para lançar o pedido já no nome da pessoa.</p>
+    <input class="campo" id="nomeP" placeholder="${esc('Comanda '+(m.pessoas.length+1))}" autocomplete="off">
+    <button class="acao" onclick="criarComanda()">Criar</button>`);
+  setTimeout(()=>$('nomeP')?.focus(),80);
+};
+window.criarComanda=()=>{
+  const m=mesaAtual();
+  const p=novaPessoa(m,$('nomeP').value.trim());
+  vista.filtro=p.id;vista.sel={};fecharModal();render();
+};
+window.selecionarComanda=fid=>{
+  const m=mesaAtual();vista.sel={};
+  itensDe(m,fid).forEach(i=>{if(!frZero(i.saldo))vista.sel[i.id]=i.saldo});
+  render();
+};
+const abas=()=>{
+  const m=mesaAtual();
+  return `<div class="tabs">
+    <button class="tab${vista.aba==='conta'?' on':''}" onclick="vista.aba='conta';render()">Conta</button>
+    <button class="tab${vista.aba==='historico'?' on':''}" onclick="vista.aba='historico';render()">
+      Pagos${m.rodadas.length?' ('+m.rodadas.length+')':''}</button></div>`;
+};
+const selecoesArray=()=>Object.entries(vista.sel).map(([itemId,unidades])=>({itemId,unidades}));
+window.alternar=id=>{
+  if(vista.sel[id])delete vista.sel[id];
+  else{
+    const it=mesaAtual().itens.find(i=>i.id===id);
+    // item com saldo inteiro entra como 1 unidade; fracionado entra pelo que resta
+    vista.sel[id]=it.saldo.d===1?fr(1):it.saldo;
+  }
+  render();
+};
+
+/* --- lançar item --- */
+window.abrirLancar=()=>{
+  modal(`<h2>Lançar item</h2><p class="dica">Toque no produto. Depois ajuste a quantidade.</p>
+    <input class="campo" id="busca" placeholder="Buscar no cardápio" oninput="filtrarCardapio()" autocomplete="off">
+    <div id="listaProd"></div>`);
+  filtrarCardapio();
+};
+window.filtrarCardapio=()=>{
+  const q=($('busca')?.value||'').toLowerCase();
+  const achados=S.cardapio.filter(p=>p.nome.toLowerCase().includes(q));
+  $('listaProd').innerHTML=
+    `<button class="cardapio-item avulso" onclick="itemAvulso()">
+      <span class="n">+ Item que não está no cardápio</span></button>`
+    + (achados.map(p=>`<button class="cardapio-item" onclick="escolherProduto('${p.id}')">
+      <span class="n">${esc(p.nome)}</span><span class="p num">${brl(p.preco)}</span></button>`).join('')
+      ||`<div class="vazio">Nada encontrado no cardápio.</div>`);
+};
+let qtdTmp=1,prodTmp=null,destTmp=null;
+window.itemAvulso=()=>{
+  modal(`<h2>Item fora do cardápio</h2>
+    <p class="dica">Para aquele pedido que não está na lista. Vale só nesta mesa.</p>
+    <label class="rot" for="avN">O que é</label>
+    <input class="campo" id="avN" placeholder="Dose de whisky" autocomplete="off">
+    <label class="rot" for="avP">Preço da unidade</label>
+    <input class="campo" id="avP" inputmode="decimal" placeholder="28,00">
+    <label style="display:flex;gap:9px;align-items:center;margin:4px 0 14px;font-size:14.5px;
+      color:var(--ink-dim)">
+      <input type="checkbox" id="avS" style="width:18px;height:18px;accent-color:var(--amber)">
+      Salvar também no cardápio</label>
+    <button class="acao" onclick="confirmarAvulso()">Continuar</button>`);
+  setTimeout(()=>$('avN')?.focus(),80);
+};
+window.confirmarAvulso=()=>{
+  const nome=$('avN').value.trim();
+  const preco=Math.round(parseFloat(($('avP').value||'').replace(/\./g,'').replace(',','.'))*100);
+  if(!nome||!Number.isFinite(preco)||preco<=0){toast('Preencha nome e preço');return}
+  if($('avS').checked){
+    prodTmp={id:'c'+Date.now(),nome,preco,comp:true};
+    S.cardapio.push(prodTmp);salvar();
+  } else {
+    prodTmp={id:'avulso'+Date.now(),nome,preco,comp:true};
+  }
+  qtdTmp=1;desenhaProduto();
+};
+window.escolherProduto=pid=>{
+  prodTmp=S.cardapio.find(p=>p.id===pid);qtdTmp=1;
+  const f=vista.filtro||'todos';
+  destTmp=(f!=='todos'&&f!=='mesa')?f:(prodTmp.comp?null:destTmp);
+  desenhaProduto();
+};
+function desenhaProduto(){
+  const m=mesaAtual();
+  modal(`<h2>${esc(prodTmp.nome)}</h2><p class="dica">${brl(prodTmp.preco)} a unidade.</p>
+    <div class="stepper"><button onclick="mudaQtd(-1)">−</button>
+      <div class="n num" id="qtdN">${qtdTmp}</div><button onclick="mudaQtd(1)">+</button></div>
+    <label class="rot">Lançar na comanda de</label>
+    <div class="destinos">
+      <button class="parte${destTmp===null?' on':''}" onclick="destTmp=null;desenhaProduto()">
+        Compartilhado</button>
+      ${m.pessoas.map(p=>`<button class="parte${destTmp===p.id?' on':''}"
+        onclick="destTmp='${p.id}';desenhaProduto()">${esc(p.nome)}</button>`).join('')}
+      <button class="parte" onclick="novaComandaNoLancamento()">+ nova</button>
+    </div>
+    <div class="previa"><div class="p">Vai lançar para ${
+      destTmp?esc(nomeDono(m,destTmp)):'todos (divide depois)'}</div>
+      <div class="g num" id="qtdV">${brl(qtdTmp*prodTmp.preco)}</div></div>
+    <button class="acao" onclick="confirmarLancar()">Lançar</button>`);
+}
+window.novaComandaNoLancamento=()=>{
+  const m=mesaAtual();const p=novaPessoa(m,'');destTmp=p.id;desenhaProduto();
+};
+window.mudaQtd=d=>{
+  qtdTmp=Math.max(1,qtdTmp+d);
+  $('qtdN').textContent=qtdTmp;$('qtdV').textContent=brl(qtdTmp*prodTmp.preco);
+};
+window.confirmarLancar=()=>{
+  const m=mesaAtual();
+  lancarItem(m,prodTmp,qtdTmp,destTmp);fecharModal();render();
+  toast(`${qtdTmp}x ${prodTmp.nome} · ${destTmp?nomeDono(m,destTmp):'compartilhado'}`);
+};
+
+/* --- divisão --- */
+let divItem=null,divPor=2,divPartes=1;
+window.abrirDivisao=id=>{
+  divItem=mesaAtual().itens.find(i=>i.id===id);
+  divPor=2;divPartes=1;desenhaDivisao();
+};
+function desenhaDivisao(){
+  const restante=frMult(divItem.saldo,fr(divItem.precoUnitario));
+  const totalRest=Math.round(restante.n/restante.d);
+  const porParte=Math.round(totalRest/divPor);
+  modal(`<h2>${esc(divItem.nome)}</h2>
+    <p class="dica">${brl(totalRest)} em aberto. Dividir entre quantas pessoas?</p>
+    <div class="stepper"><button onclick="mudaDiv(-1)">−</button>
+      <div class="n num">${divPor}</div><button onclick="mudaDiv(1)">+</button></div>
+    <div class="previa"><div class="p">Cada pessoa paga</div>
+      <div class="g num">${brl(porParte)}</div>
+      <div class="p">Quantas partes este cliente leva?</div>
+      <div class="partes">${Array.from({length:divPor},(_,k)=>
+        `<button class="parte${divPartes===k+1?' on':''}" onclick="mudaPartes(${k+1})">${k+1}</button>`).join('')}
+      </div></div>
+    <button class="acao" onclick="aplicarDivisao()">
+      Marcar ${brl(Math.round(totalRest*divPartes/divPor))}</button>`);
+}
+window.mudaDiv=d=>{divPor=Math.min(20,Math.max(2,divPor+d));
+  divPartes=Math.min(divPartes,divPor);desenhaDivisao()};
+window.mudaPartes=k=>{divPartes=k;desenhaDivisao()};
+window.aplicarDivisao=()=>{
+  vista.sel[divItem.id]=frMult(divItem.saldo,fr(divPartes,divPor));
+  fecharModal();render();
+};
+
+/* --- cobrança --- */
+let meioSel='credito';
+window.irCobrar=()=>{
+  const m=mesaAtual();
+  const r=calcularRodada(m,selecoesArray(),{cobrarServico:vista.servico});
+  desenhaCobranca(r);
+};
+function desenhaCobranca(r){
+  modal(`<div class="cobrar"><div class="rot">Digite este valor na maquininha</div>
+      <div class="big num">${brl(r.total)}</div>
+      <div class="rot">${r.linhas.map(l=>esc(l.rotulo)).join(' · ')}${
+        r.servico?' · serviço '+brl(r.servico):''}</div></div>
+    <button class="acao sec" onclick="copiar(${r.total})">Copiar valor</button>
+    <div class="meios">
+      ${['credito','debito','pix','dinheiro'].map(x=>
+        `<button class="meio${meioSel===x?' on':''}" onclick="meioSel='${x}';irCobrar()">
+          ${{credito:'Crédito',debito:'Débito',pix:'Pix',dinheiro:'Dinheiro'}[x]}</button>`).join('')}
+    </div>
+    <button class="acao" onclick="confirmarPagamento()">Recebi, dar baixa</button>`);
+}
+window.copiar=c=>{
+  const t=(c/100).toFixed(2).replace('.',',');
+  navigator.clipboard?.writeText(t).then(()=>toast('Copiado: '+t)).catch(()=>toast(t));
+};
+window.confirmarPagamento=()=>{
+  const m=mesaAtual();
+  const r=calcularRodada(m,selecoesArray(),{cobrarServico:vista.servico});
+  confirmarRodada(m,r,{meio:meioSel});salvar();
+  vista.sel={};fecharModal();render();
+  toast(mesaQuitada(m)?'Mesa quitada':'Baixa dada · falta '+brl(saldoMesa(m)));
+};
+window.fazerEstorno=rid=>{
+  modal(`<h2>Estornar</h2><p class="dica">Os itens voltam para a mesa em aberto.
+    Isso não cancela nada na maquininha — só corrige a conta aqui.</p>
+    <button class="acao" onclick="confirmarEstorno('${rid}')">Estornar</button>
+    <button class="acao sec" style="margin-top:8px" onclick="fecharModal()">Cancelar</button>`);
+};
+window.confirmarEstorno=rid=>{
+  estornarRodada(mesaAtual(),rid);salvar();fecharModal();render();toast('Estornado');
+};
+window.encerrar=()=>{
+  const m=mesaAtual();m.status='encerrada';salvar();
+  vista.tela='mesas';vista.mesaId=null;render();toast('Mesa '+m.numero+' encerrada');
+};
+
+/* --- cardápio --- */
+function telaCardapio(){
+  $('tela').innerHTML=
+    `<div class="acoes-cardapio">
+       <button class="acao-card" onclick="importarFoto()">
+         <b>📷 Ler de uma foto</b><span>Fotografe o cardápio e ele cadastra</span></button>
+       <button class="acao-card" onclick="editarProduto(null)">
+         <b>✏️ Digitar um item</b><span>Cadastrar na mão, um por um</span></button>
+     </div>
+     <div class="titulo-lista">${S.cardapio.length} ${
+       S.cardapio.length===1?'item cadastrado':'itens cadastrados'}</div>`
+    + (S.cardapio.length
+       ? S.cardapio.map(p=>`
+         <button class="cardapio-item" onclick="editarProduto('${p.id}')">
+           <span class="n">${esc(p.nome)}</span><span class="p num">${brl(p.preco)}</span></button>`).join('')
+       : `<div class="vazio"><strong>Cardápio vazio</strong>
+          Use um dos dois botões acima para começar.</div>`);
+  $('barra').innerHTML='';
+}
+/* ---- leitura de cardápio por foto (OCR no próprio navegador) ---- */
+let lidos=[];
+window.importarFoto=()=>{
+  modal(`<h2>Ler cardápio de uma foto</h2>
+    <p class="dica">Tire foto do cardápio ou escolha da galeria. Pode mandar várias páginas
+      de uma vez. Depois você confere o que ele leu antes de cadastrar.</p>
+    <div class="cartao-e"><b>Para ler bem</b><span>Foto reta, de frente, bem de perto.
+      <b>Uma coluna por foto</b> acerta muito mais que a página inteira. Se o cardápio for
+      plastificado, cuidado com o reflexo.</span></div>
+    <div class="cartao-e"><b>Melhor ainda</b><span>Se o cardápio existe digitado em algum
+      lugar, use o botão de texto aqui embaixo. Aí acerta tudo.</span></div>
+    <input type="file" id="fotos" accept="image/*" multiple style="display:none"
+      onchange="lerFotos(this.files)">
+    <button class="acao" onclick="$('fotos').click()">Escolher fotos</button>
+    <button class="acao sec" style="margin-top:8px" onclick="colarTexto()">
+      Tenho o cardápio em texto</button>
+    <button class="acao sec" style="margin-top:8px" onclick="fecharModal()">Cancelar</button>`);
+};
+/** Caminho sem erro: se o cardápio existe em PDF, Word ou WhatsApp, cola aqui. */
+window.colarTexto=()=>{
+  modal(`<h2>Colar o cardápio</h2>
+    <p class="dica">Se você tem o cardápio digitado em algum lugar — PDF, Word, bloco de
+      notas, mensagem de WhatsApp — copie e cole aqui. Assim não tem erro de leitura.</p>
+    <textarea class="campo" id="txtCard" rows="9" placeholder="Chopp 300ml 12,00
+Cerveja 600ml 35,00
+Porção de fritas 42,00"
+      style="font-size:15px;line-height:1.6;resize:vertical"></textarea>
+    <button class="acao" onclick="lerColado()">Ler o que colei</button>`);
+  setTimeout(()=>$('txtCard')?.focus(),80);
+};
+window.lerColado=()=>{
+  lidos=extrairItens($('txtCard').value||'');
+  const vistos=new Set();
+  lidos=lidos.filter(x=>{const k=x.nome.toLowerCase();
+    if(vistos.has(k))return false;vistos.add(k);return true});
+  revisarLidos();
+};
+/**
+ * Trata a foto antes de ler: aumenta, tira a cor e joga para preto e branco
+ * puro com limiar de Otsu. Isso resolve luz irregular e papel amarelado,
+ * que é onde a leitura mais erra.
+ */
+function prepararFoto(file){
+  return new Promise((ok,erro)=>{
+    const img=new Image();
+    img.onload=()=>{
+      const alvo=1900;
+      const esc=Math.min(3,Math.max(1,alvo/Math.max(img.width,img.height)));
+      const c=document.createElement('canvas');
+      c.width=Math.round(img.width*esc); c.height=Math.round(img.height*esc);
+      const x=c.getContext('2d',{willReadFrequently:true});
+      x.imageSmoothingQuality='high';
+      x.drawImage(img,0,0,c.width,c.height);
+      const d=x.getImageData(0,0,c.width,c.height), p=d.data;
+      // cinza + histograma
+      const hist=new Array(256).fill(0);
+      for(let i=0;i<p.length;i+=4){
+        const g=(p[i]*0.299+p[i+1]*0.587+p[i+2]*0.114)|0;
+        p[i]=p[i+1]=p[i+2]=g; hist[g]++;
+      }
+      // limiar de Otsu
+      const total=c.width*c.height;
+      let soma=0; for(let i=0;i<256;i++)soma+=i*hist[i];
+      let somaB=0,wB=0,melhor=0,limiar=128;
+      for(let t=0;t<256;t++){
+        wB+=hist[t]; if(!wB)continue;
+        const wF=total-wB; if(!wF)break;
+        somaB+=t*hist[t];
+        const mB=somaB/wB, mF=(soma-somaB)/wF;
+        const entre=wB*wF*(mB-mF)*(mB-mF);
+        if(entre>melhor){melhor=entre;limiar=t}
+      }
+      for(let i=0;i<p.length;i+=4){
+        const v=p[i]>limiar?255:0;
+        p[i]=p[i+1]=p[i+2]=v;
+      }
+      x.putImageData(d,0,0);
+      c.toBlob(b=>ok(b),'image/png');
+      URL.revokeObjectURL(img.src);
+    };
+    img.onerror=()=>erro(new Error('não consegui abrir a imagem'));
+    img.src=URL.createObjectURL(file);
+  });
+}
+
+function carregarOCR(){
+  return new Promise((ok,erro)=>{
+    if(window.Tesseract)return ok();
+    const t=document.createElement('script');
+    t.src='https://cdn.jsdelivr.net/npm/tesseract.js@5/dist/tesseract.min.js';
+    t.onload=()=>ok();t.onerror=()=>erro(new Error('sem conexão'));
+    document.head.appendChild(t);
+  });
+}
+/**
+ * Tira os itens do texto lido. Aceita vários formatos de cardápio:
+ *   Cerveja 600ml ......... 35,00      Chopp  R$ 12
+ *   Picanha na chapa 89.90             Suco natural 12,5
+ *   Fritas                             (nome numa linha, preço na outra)
+ *   42,00
+ */
+function extrairItens(texto){
+  const fora=/^(card[áa]pio|menu|bebidas|por[çc][õo]es|pratos|sobremesas|drinks|entradas|lanches|petiscos|saladas|massas|carnes|combos|total|servi[çc]o|couvert|pre[çc]os?)$/i;
+  const limpar=s=>s.replace(/[.\-–—•:·…]+$/,'').replace(/^[.\-–—•:·…]+/,'').trim();
+
+  // conserta trocas comuns de leitura dentro de números
+  const numLimpo=t=>t.replace(/[OoQ]/g,'0').replace(/[lI|]/g,'1').replace(/[Ss]/g,'5')
+                     .replace(/[Bb]/g,'8').replace(/[Zz]/g,'2');
+
+  const linhas=texto.split(/\n+/).map(l=>l.replace(/\s+/g,' ').trim()).filter(Boolean);
+  const achados=[];
+  let pendente=null;   // nome que ficou esperando o preço da linha seguinte
+
+  const virarPreco=bruto=>{
+    const t=numLimpo(String(bruto).replace(/[^\dOoQlI|SsBbZz.,]/g,''));
+    let m=t.match(/^(\d{1,4})[.,](\d{1,2})$/);
+    if(m)return parseInt(m[1],10)*100+parseInt((m[2]+'0').slice(0,2),10);
+    m=t.match(/^(\d{1,4})$/);
+    if(m){const v=parseInt(m[1],10); return (v>=2&&v<=999)?v*100:null}
+    return null;
+  };
+
+  const PRECO='[0-9OoQlI|SsBbZz]';
+  const reFim   =new RegExp('^(.{2,70}?)[\\s.\\-–—•:·…]*R?\\$?\\s*('+PRECO+'{1,4}(?:[.,]'+PRECO+'{1,2})?)$');
+  const reInicio=new RegExp('^R?\\$?\\s*('+PRECO+'{1,4}(?:[.,]'+PRECO+'{1,2})?)\\s+(.{3,70})$');
+  const reSo    =new RegExp('^R?\\$?\\s*('+PRECO+'{1,4}(?:[.,]'+PRECO+'{1,2})?)$');
+  const nomeOk  =n=>n.length>=3&&/[a-zA-ZÀ-ú]{3}/.test(n);
+  // o pedaço do preço precisa ter pelo menos um algarismo de verdade,
+  // senão o "s" final de "fritas" acaba virando 5
+  const precoOk =t=>/[0-9]/.test(t);
+
+  for(const l of linhas){
+    if(l.length<2||fora.test(l))continue;
+
+    const so=l.match(reSo);
+    if(so&&precoOk(so[1])&&pendente){
+      const p=virarPreco(so[1]);
+      if(p){achados.push({nome:pendente,preco:p,usar:true});pendente=null;continue}
+    }
+
+    let achou=false;
+    for(const [re,iNome,iPreco] of [[reFim,1,2],[reInicio,2,1]]){
+      const m=l.match(re);
+      if(!m||!precoOk(m[iPreco]))continue;
+      const nome=limpar(m[iNome]), preco=virarPreco(m[iPreco]);
+      if(nomeOk(nome)&&preco&&preco<=500000){
+        achados.push({nome,preco,usar:true});
+        pendente=null;achou=true;break;
+      }
+    }
+    if(achou)continue;
+
+    pendente=(nomeOk(l)&&l.length<=70)?limpar(l):null;
+  }
+  return achados;
+}
+window.lerFotos=async files=>{
+  if(!files||!files.length)return;
+  const arr=[...files];
+  modal(`<h2>Lendo</h2><p class="dica" id="statusOcr">Preparando…</p>
+    <div class="barrinha"><i id="prog" style="width:4%"></i></div>
+    <p class="dica" style="margin-top:14px">Na primeira vez ele baixa o leitor, o que demora
+      um pouco. Das próximas é mais rápido. Não feche a tela.</p>`);
+  try{ await carregarOCR(); }
+  catch(e){
+    modal(`<h2>Sem conexão</h2><p class="dica">A leitura por foto precisa de internet na
+      primeira vez, para baixar o leitor. Conecte e tente de novo — ou cadastre na mão.</p>
+      <button class="acao" onclick="fecharModal()">Entendi</button>`);
+    return;
+  }
+  lidos=[];
+  try{
+    const worker=await Tesseract.createWorker('por');
+    await worker.setParameters({
+      tessedit_pageseg_mode:'4',          // uma coluna de texto, que é o caso do cardápio
+      preserve_interword_spaces:'1',
+      tessedit_char_blacklist:'|~^_{}[]<>'
+    });
+    for(let i=0;i<arr.length;i++){
+      $('statusOcr').textContent=`Tratando a foto ${i+1} de ${arr.length}…`;
+      const tratada=await prepararFoto(arr[i]);
+      $('statusOcr').textContent=`Lendo a foto ${i+1} de ${arr.length}…`;
+      const r=await worker.recognize(tratada);
+      lidos=lidos.concat(extrairItens(r.data.text||''));
+      $('prog').style.width=Math.round((i+1)/arr.length*100)+'%';
+    }
+    await worker.terminate();
+  }catch(e){
+    modal(`<h2>Não consegui ler</h2><p class="dica">${esc(String(e.message||e))}</p>
+      <button class="acao" onclick="fecharModal()">Fechar</button>`);
+    return;
+  }
+  // tira repetidos
+  const vistos=new Set();
+  lidos=lidos.filter(x=>{const k=x.nome.toLowerCase();
+    if(vistos.has(k))return false;vistos.add(k);return true});
+  revisarLidos();
+};
+function revisarLidos(){
+  if(!lidos.length){
+    modal(`<h2>Não achei preços</h2>
+      <p class="dica">Ele procura linhas com nome e preço, tipo “Cerveja 600ml 35,00”.
+        Tente uma foto mais reta, mais perto, ou com uma coluna por vez.</p>
+      <button class="acao" onclick="importarFoto()">Tentar outra foto</button>
+      <button class="acao sec" style="margin-top:8px" onclick="fecharModal()">Cadastrar na mão</button>`);
+    return;
+  }
+  const n=lidos.filter(x=>x.usar).length;
+  modal(`<h2>Confira antes de cadastrar</h2>
+    <p class="dica">Ele leu ${lidos.length} ${lidos.length===1?'item':'itens'}.
+      Desmarque o que não presta e corrija o que saiu torto.</p>
+    <div class="lidos">${lidos.map((x,i)=>`
+      <div class="lido${x.usar?'':' off'}">
+        <button class="bx" onclick="alternarLido(${i})"></button>
+        <input class="campo nome" value="${esc(x.nome)}"
+          oninput="lidos[${i}].nome=this.value">
+        <input class="campo preco" inputmode="decimal" value="${(x.preco/100).toFixed(2).replace('.',',')}"
+          oninput="mudarPrecoLido(${i},this.value)">
+      </div>`).join('')}</div>
+    <button class="acao" onclick="confirmarImportacao()">Cadastrar ${n} ${n===1?'item':'itens'}</button>
+    <button class="acao sec" style="margin-top:8px" onclick="importarFoto()">Ler outra foto</button>`);
+}
+window.alternarLido=i=>{lidos[i].usar=!lidos[i].usar;revisarLidos()};
+window.mudarPrecoLido=(i,v)=>{
+  const p=Math.round(parseFloat(String(v).replace(/\./g,'').replace(',','.'))*100);
+  if(Number.isFinite(p))lidos[i].preco=p;
+};
+window.confirmarImportacao=()=>{
+  let n=0;
+  lidos.filter(x=>x.usar&&x.nome.trim()&&x.preco>0).forEach(x=>{
+    S.cardapio.push({id:'c'+Date.now()+Math.random().toString(36).slice(2,5),
+      nome:x.nome.trim(),preco:x.preco,comp:true});n++;
+  });
+  salvar();lidos=[];fecharModal();render();
+  toast(n+(n===1?' item cadastrado':' itens cadastrados'));
+};
+
+window.editarProduto=pid=>{
+  const p=pid?S.cardapio.find(x=>x.id===pid):null;
+  modal(`<h2>${p?'Editar produto':'Novo produto'}</h2>
+    <label class="rot" for="pn">Nome</label>
+    <input class="campo" id="pn" value="${p?esc(p.nome):''}" autocomplete="off">
+    <label class="rot" for="pp">Preço</label>
+    <input class="campo" id="pp" inputmode="decimal" placeholder="35,00"
+      value="${p?(p.preco/100).toFixed(2).replace('.',','):''}">
+    <button class="acao" onclick="salvarProduto(${p?`'${p.id}'`:'null'})">Salvar</button>
+    ${p?`<button class="acao sec" style="margin-top:8px;color:var(--alerta)"
+      onclick="removerProduto('${p.id}')">Remover do cardápio</button>`:''}`);
+};
+window.salvarProduto=pid=>{
+  const nome=$('pn').value.trim();
+  const preco=Math.round(parseFloat($('pp').value.replace(/\./g,'').replace(',','.'))*100);
+  if(!nome||!Number.isFinite(preco)||preco<=0){toast('Preencha nome e preço');return}
+  if(pid){const p=S.cardapio.find(x=>x.id===pid);p.nome=nome;p.preco=preco}
+  else S.cardapio.push({id:'c'+Date.now(),nome,preco,comp:true});
+  salvar();fecharModal();render();
+};
+window.removerProduto=pid=>{
+  S.cardapio=S.cardapio.filter(p=>p.id!==pid);salvar();fecharModal();render();
+};
+
+/* --- modal --- */
+function modal(html){
+  $('modal').innerHTML=`<div class="fundo" onclick="if(event.target===this)fecharModal()">
+    <div class="modal">${html}</div></div>`;
+}
+window.fecharModal=()=>{$('modal').innerHTML=''};
+
+/* ==========================================================================
+   PRIMEIRA ABERTURA E ATIVAÇÃO
+   ========================================================================== */
+const WHATS='5581999649347';
+const PRECO='R$ 149';
+
+function boasVindas(){
+  modal(`<h2>Divide Aí</h2>
+    <p class="dica">Comanda por pessoa e divisão de conta, sem calculadora.</p>
+    <div class="cartao-e"><b>1 · Abra a mesa</b><span>Uma comanda para cada pessoa.</span></div>
+    <div class="cartao-e"><b>2 · Lance os pedidos</b><span>Já no nome de quem pediu.</span></div>
+    <div class="cartao-e"><b>3 · Feche por pessoa</b><span>O que foi de todos, divide num toque.</span></div>
+    <button class="acao" onclick="fecharModal();mesaExemplo()">Ver funcionando</button>
+    <button class="acao sec" style="margin-top:8px" onclick="fecharModal()">Começar do zero</button>`);
+  try{localStorage.setItem('divideai_visto','1')}catch(e){}
+}
+window.telaAtivar=()=>{
+  const msg=encodeURIComponent('Quero ativar o Divide Aí no meu estabelecimento.');
+  const l=licenca();
+  const guardado=(()=>{try{return localStorage.getItem('divideai_estab')||''}catch(e){return ''}})();
+  modal(`<h2>${l&&l.vencida?'Renovar acesso':'Ativar o app'}</h2>
+    <p class="dica">${l&&l.vencida
+      ? 'Seu acesso venceu em '+l.fim.toLocaleDateString('pt-BR')+
+        '. Nenhuma mesa foi perdida — é só colocar a chave nova.'
+      : `Uma compra libera <b>todos os aparelhos do seu estabelecimento</b> — celular dos
+         garçons e maquininhas. Use o mesmo código e a mesma chave em cada um.`}</p>
+    <label class="rot" for="estabIn">Código do estabelecimento</label>
+    <input class="campo" id="estabIn" placeholder="BAR-7K3Q" autocomplete="off"
+      value="${esc(guardado)}" style="text-transform:uppercase;letter-spacing:.06em">
+    <label class="rot" for="chaveIn">Chave de ativação</label>
+    <input class="campo" id="chaveIn" placeholder="XXXX-XXXX-XXXX" autocomplete="off"
+      style="text-transform:uppercase;letter-spacing:.08em">
+    <button class="acao" onclick="confirmarAtivacao()">Ativar</button>
+    <a class="acao sec" style="display:block;text-align:center;text-decoration:none;margin-top:8px"
+      href="https://wa.me/${WHATS}?text=${msg}" target="_blank" rel="noopener">
+      Ainda não tenho — falar no WhatsApp</a>`);
+};
+window.confirmarAtivacao=()=>{
+  const r=ativar($('estabIn').value,$('chaveIn').value);
+  if(r===true){
+    const l=licenca();
+    fecharModal();render();
+    modal(`<h2>Ativado</h2><p class="dica">Sem limite de mesas${
+      l.fim?`, até <b>${l.fim.toLocaleDateString('pt-BR')}</b>`:', para sempre'}.<br>
+      Use o mesmo código e chave nos outros aparelhos do estabelecimento.</p>
+      <button class="acao" onclick="fecharModal()">Começar</button>`);
+  } else if(r==='vencida'){
+    toast('Essa chave já venceu — peça a nova');
+  } else if(r==='estab'){
+    toast('Digite o código do estabelecimento');
+  } else {
+    toast('Código e chave não combinam');
+  }
+};
+window.telaAjuda=()=>{
+  modal(`<h2>Como usar</h2>
+    <div class="cartao-e"><b>Comanda</b><span>Toque em + comanda para cada pessoa.
+      Use o que ajudar a lembrar: camisa azul, aniversariante.</span></div>
+    <div class="cartao-e"><b>Lançar pedido</b><span>Escolha para quem: a comanda da pessoa,
+      ou Compartilhado quando for da mesa toda.</span></div>
+    <div class="cartao-e"><b>Dividir</b><span>No item compartilhado, toque em dividir.
+      Diga por quantos e quantas partes esse cliente leva.</span></div>
+    <div class="cartao-e"><b>Cobrar</b><span>Toque na comanda da pessoa e em Fechar esta comanda.
+      O valor aparece grande, é o que você digita na maquininha.</span></div>
+    <div class="cartao-e alerta"><b>Dar baixa só depois de aprovado</b>
+      <span>É esse toque que desconta da mesa. Cartão negado, não dá baixa.</span></div>
+    <div class="cartao-e"><b>Errou?</b><span>Aba Pagos, toque na conta e em Estornar.
+      Os itens voltam para a mesa.</span></div>
+    <button class="acao" onclick="fecharModal()">Entendi</button>`);
+};
+
+carregar();render();
+try{if(!localStorage.getItem('divideai_visto'))setTimeout(boasVindas,300)}catch(e){}
+</script>
+</body>
+</html>
